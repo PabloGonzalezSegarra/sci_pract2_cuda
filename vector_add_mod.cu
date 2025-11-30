@@ -23,11 +23,36 @@ int main(){
 
     float* a_cuda = cudaMalloc(sizeof(float) * N);
     float* b_cuda = cudaMalloc(sizeof(float) * N);
-    float*  out_cuda = cudaMalloc(sizeof(float) * N);
+    float* out_cuda = cudaMalloc(sizeof(float) * N);
+
+    cudaMemcpy(a_cuda, a, sizeof(float) * N, cudaMemcpyHostToDevice);
+    cudaMemcpy(b_cuda, b, sizeof(float) * N, cudaMemcpyHostToDevice);
 
     // Main function
-    vector_add<<<1,1>>>(out, a, b, N);
+    vector_add<<<1,1>>>(out, a_cuda, b_cuda, N);
+
+    cudaMemcpy(out, out_cuda, sizeof(float) * N, cudaMemcpyDeviceToHost);
 
     cudaDeviceSynchronize();
-    printf("Test");
+
+
+    // Verify result
+    for(int i = 0; i < N; i++){
+        if(out[i] != 3.0f){
+            printf("Error at index %d: %f\n", i, out[i]);
+            return -1;
+        }
+    }   
+
+    printf("Success! All values are correct.\n");
+
+    // Free memory
+    cudaFree(a_cuda);
+    cudaFree(b_cuda);
+    cudaFree(out_cuda);
+
+    free(a);
+    free(b);
+    free(out);
+
 }
