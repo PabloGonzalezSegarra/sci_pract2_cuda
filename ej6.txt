@@ -1,0 +1,15 @@
+
+
+
+CPU:
+
+Elapsed time: 225730.731701 ms
+GFLOPS: 0.177202
+Elapsed time: 225775.363480 ms
+GFLOPS: 0.177167
+Elapsed time: 225413.030444 ms
+GFLOPS: 0.177452
+Elapsed time: 224690.438361 ms
+GFLOPS: 0.178023
+Elapsed time: 224934.833417 ms
+GFLOPS: 0.177829
