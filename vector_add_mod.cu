@@ -21,4 +21,6 @@ int main(){
 
     // Main function
     vector_add(out, a, b, N);
+
+    printf("Test");
 }
