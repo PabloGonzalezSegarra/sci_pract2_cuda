@@ -1,6 +1,7 @@
 #define N 100000000
 
 #include <stdio.h>
+#include <math.h>
 
 __global__ void vector_add(float *out, float *a, float *b, int n) {
     for(int i = 0; i < n; i++){
@@ -37,12 +38,13 @@ int main(){
 
 
     // Verify result
+    const float MAX_ERR = 1e-6f;
     for(int i = 0; i < N; i++){
-        if(out[i] != 3.0f){
-            printf("Error at index %d: %f\n", i, out[i]);
+        if(fabsf(out[i] - 3.0f) > MAX_ERR){
+            printf("Error at index %d: %f (diff=%f)\n", i, out[i], fabsf(out[i] - 3.0f));
             return -1;
         }
-    }   
+    }
 
     printf("Success! All values are correct.\n");
 
