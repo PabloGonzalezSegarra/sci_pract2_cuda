@@ -1,4 +1,4 @@
-
+%%cuda
 #define N 100000000
 
 #include <stdio.h>
