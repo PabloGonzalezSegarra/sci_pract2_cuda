@@ -12,9 +12,8 @@ __global__ void vector_add(float *out, float *a, float *b, int n) {
     }
 }
 
-int main(){
+int main(int argc, char **argv){
     
-
     float *a, *b, *out; 
 
     // Allocate memory
@@ -47,8 +46,11 @@ int main(){
     cudaMemcpy(b_cuda, b, sizeof(float) * N, cudaMemcpyHostToDevice);
 
     // Main function
-    int threadsPerBlock = 1;
+    // threadsPerBlock is taken from argv[1] (assume valid integer provided)
+    int threadsPerBlock = atoi(argv[1]);
     int blocks = (N + threadsPerBlock - 1) / threadsPerBlock;
+    // Print configuration
+    printf("Using %d blocks of %d threads\n", blocks, threadsPerBlock);
     vector_add<<<blocks, threadsPerBlock>>>(out_cuda, a_cuda, b_cuda, N);
 
     cudaMemcpy(out, out_cuda, sizeof(float) * N, cudaMemcpyDeviceToHost);
