@@ -26,6 +26,14 @@ int main(){
 
     float *a_cuda = NULL, *b_cuda = NULL, *out_cuda = NULL;
 
+    // Create events for timing
+    cudaEvent_t start, end;
+    cudaEventCreate(&start);
+    cudaEventCreate(&end);
+
+    // Start timing
+    cudaEventRecord(start);
+
     // Allocate device memory
     cudaMalloc((void**)&a_cuda, sizeof(float) * N);
     cudaMalloc((void**)&b_cuda, sizeof(float) * N);
@@ -40,7 +48,12 @@ int main(){
 
     cudaMemcpy(out, out_cuda, sizeof(float) * N, cudaMemcpyDeviceToHost);
 
-    cudaDeviceSynchronize();
+    // End timing
+    cudaEventRecord(end);
+    cudaEventSynchronize(end);
+    float milliseconds = 0;
+    cudaEventElapsedTime(&milliseconds, start, end);
+    printf("Time elapsed: %f ms\n", milliseconds);
 
     // Verify result
     const float MAX_ERR = 1e-6f;
