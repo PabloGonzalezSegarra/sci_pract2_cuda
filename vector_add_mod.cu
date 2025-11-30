@@ -1,7 +1,9 @@
 #define N 100000000
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
+#include <cuda_runtime.h>
 
 __global__ void vector_add(float *out, float *a, float *b, int n) {
     for(int i = 0; i < n; i++){
@@ -22,12 +24,16 @@ int main(){
         a[i] = 1.0f; b[i] = 2.0f;
     }
 
-    float* a_cuda = (float*)cudaMalloc(sizeof(float) * N);
-    float* b_cuda = (float*)cudaMalloc(sizeof(float) * N);
-    float* out_cuda = (float*)cudaMalloc(sizeof(float) * N);
+    float *a_cuda = NULL, *b_cuda = NULL, *out_cuda = NULL;
 
-    cudaMemcpy(a_cuda, a, sizeof(float) * N, cudaMemcpyHostToDevice);
-    cudaMemcpy(b_cuda, b, sizeof(float) * N, cudaMemcpyHostToDevice);
+    // Allocate device memory
+    cudaMalloc((void**)&a_cuda, sizeof(float) * (size_t)N);
+    cudaMalloc((void**)&b_cuda, sizeof(float) * (size_t)N);
+    cudaMalloc((void**)&out_cuda, sizeof(float) * (size_t)N);
+
+    // Copy inputs to device
+    cudaMemcpy(a_cuda, a, sizeof(float) * (size_t)N, cudaMemcpyHostToDevice);
+    cudaMemcpy(b_cuda, b, sizeof(float) * (size_t)N, cudaMemcpyHostToDevice);
 
     // Main function
     vector_add<<<1,1>>>(out, a_cuda, b_cuda, N);
@@ -35,7 +41,6 @@ int main(){
     cudaMemcpy(out, out_cuda, sizeof(float) * N, cudaMemcpyDeviceToHost);
 
     cudaDeviceSynchronize();
-
 
     // Verify result
     const float MAX_ERR = 1e-6f;
