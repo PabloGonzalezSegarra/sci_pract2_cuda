@@ -27,16 +27,16 @@ int main(){
     float *a_cuda = NULL, *b_cuda = NULL, *out_cuda = NULL;
 
     // Allocate device memory
-    cudaMalloc((void**)&a_cuda, sizeof(float) * (size_t)N);
-    cudaMalloc((void**)&b_cuda, sizeof(float) * (size_t)N);
-    cudaMalloc((void**)&out_cuda, sizeof(float) * (size_t)N);
+    cudaMalloc((void**)&a_cuda, sizeof(float) * N);
+    cudaMalloc((void**)&b_cuda, sizeof(float) * N);
+    cudaMalloc((void**)&out_cuda, sizeof(float) * N);
 
     // Copy inputs to device
-    cudaMemcpy(a_cuda, a, sizeof(float) * (size_t)N, cudaMemcpyHostToDevice);
-    cudaMemcpy(b_cuda, b, sizeof(float) * (size_t)N, cudaMemcpyHostToDevice);
+    cudaMemcpy(a_cuda, a, sizeof(float) * N, cudaMemcpyHostToDevice);
+    cudaMemcpy(b_cuda, b, sizeof(float) * N, cudaMemcpyHostToDevice);
 
     // Main function
-    vector_add<<<1,1>>>(out, a_cuda, b_cuda, N);
+    vector_add<<<1,1>>>(out_cuda, a_cuda, b_cuda, N);
 
     cudaMemcpy(out, out_cuda, sizeof(float) * N, cudaMemcpyDeviceToHost);
 
@@ -61,5 +61,4 @@ int main(){
     free(a);
     free(b);
     free(out);
-
 }
