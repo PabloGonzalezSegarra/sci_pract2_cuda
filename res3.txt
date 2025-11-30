@@ -1,3 +1,6 @@
+Tiempo de ejecutar 1 thread/block (100000000 blocks of 1 threads)
+Adjuntar codigo ej3.cu
+
 1. 5887.441895
 2. 5864.148926
 3. 5918.630859
