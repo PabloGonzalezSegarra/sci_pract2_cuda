@@ -22,9 +22,9 @@ int main(){
         a[i] = 1.0f; b[i] = 2.0f;
     }
 
-    float* a_cuda = cudaMalloc(sizeof(float) * N);
-    float* b_cuda = cudaMalloc(sizeof(float) * N);
-    float* out_cuda = cudaMalloc(sizeof(float) * N);
+    void* a_cuda = cudaMalloc(sizeof(float) * N);
+    void* b_cuda = cudaMalloc(sizeof(float) * N);
+    void* out_cuda = cudaMalloc(sizeof(float) * N);
 
     cudaMemcpy(a_cuda, a, sizeof(float) * N, cudaMemcpyHostToDevice);
     cudaMemcpy(b_cuda, b, sizeof(float) * N, cudaMemcpyHostToDevice);
