@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-void heavy_cpu(float* data, int N) {
-    for (int i = 0; i < N; i++) {
+void heavy_cpu(float* data, int n) {
+    for (int i = 0; i < n; i++) {
         float x = data[i];
         for (int j = 0; j < 10000; j++) {
             x = sinf(x) * 1.00001f + cosf(x) * 0.99999f;
