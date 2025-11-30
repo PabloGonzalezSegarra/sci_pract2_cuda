@@ -2,6 +2,13 @@ Rellenar la tabla con estos datos
 Adjuntar codigo ej4.cu
 Adjuntar codigo vector_add_cpu.cu version cpu
 
+CPU (1 thread):
+    1. 995.965764
+    2. 992.593305
+    3. 1000.372240
+    4. 999.341579
+    5. 994.057475
+    Best: 992.593305
 
 1 thread/block (100000000 blocks of 1 threads):
     1. 668.483093
@@ -9,6 +16,8 @@ Adjuntar codigo vector_add_cpu.cu version cpu
     3. 532.788574
     4. 534.341553
     5. 532.356262
+    Best: 532.356262
+    Acceleration vs CPU: 1.86x
 
 16 threads/block (6250000 blocks of 16 threads):
     1. 438.179443
@@ -16,6 +25,8 @@ Adjuntar codigo vector_add_cpu.cu version cpu
     3. 443.540283
     4. 443.221252
     5. 447.020142
+    Best: 438.179443
+    Acceleration vs CPU: 2.27x
 
 32 threads/block (3125000 blocks of 32 threads):
     1. 431.764954
@@ -23,6 +34,8 @@ Adjuntar codigo vector_add_cpu.cu version cpu
     3. 439.704651
     4. 438.405884
     5. 504.509369
+    Best: 431.764954
+    Acceleration vs CPU: 2.30x
 
 256 threads/block (390625 blocks of 256 threads):
     1. 428.388153
@@ -30,3 +43,5 @@ Adjuntar codigo vector_add_cpu.cu version cpu
     3. 428.647797
     4. 434.573090
     5. 430.826813
+    Best: 428.388153
+    Acceleration vs CPU: 2.32x
