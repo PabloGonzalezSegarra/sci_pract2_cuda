@@ -6,12 +6,15 @@
 #include <cuda_runtime.h>
 
 __global__ void vector_add(float *out, float *a, float *b, int n) {
-    for(int i = 0; i < n; i++){
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i < n) {
         out[i] = a[i] + b[i];
     }
 }
 
 int main(){
+    
+
     float *a, *b, *out; 
 
     // Allocate memory
@@ -44,7 +47,9 @@ int main(){
     cudaMemcpy(b_cuda, b, sizeof(float) * N, cudaMemcpyHostToDevice);
 
     // Main function
-    vector_add<<<1,1>>>(out_cuda, a_cuda, b_cuda, N);
+    int threadsPerBlock = 1;
+    int blocks = (N + threadsPerBlock - 1) / threadsPerBlock;
+    vector_add<<<blocks, threadsPerBlock>>>(out_cuda, a_cuda, b_cuda, N);
 
     cudaMemcpy(out, out_cuda, sizeof(float) * N, cudaMemcpyDeviceToHost);
 
