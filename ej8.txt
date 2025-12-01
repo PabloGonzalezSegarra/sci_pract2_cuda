@@ -1,6 +1,10 @@
 
 
 Tiempo de ejecucion N = 1,000,000
+Con el objetivo de poder comparar los resultados
+de las optimizaciones con la CPU se ha usado un 
+tamaño de N = 1,000,000 para que esta pueda 
+resolver el problema en un tiempo razonable.
     CPU:
         1. 324755.684563 ms
 
@@ -147,3 +151,10 @@ Tiempo de ejecucion N = 1,000,000
             Best. 1.017792 ms
         Best overall: 0.914304 ms (256 threads per block)
         Speedup: 354.99x
+
+Tamaño de N = 100,000,000
+Para comparar 
+    GPU suma de b secuencial:
+
+    GPU suma de b paralelizada:
+       

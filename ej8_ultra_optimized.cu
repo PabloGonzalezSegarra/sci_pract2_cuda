@@ -98,6 +98,10 @@ int main(int argc, char **argv){
     // Print configuration
     printf("Using %d blocks of %d threads\n", blocks, threadsPerBlock);
 
+    // Print number of logical CPU cores
+    const int num_threads = sysconf(_SC_NPROCESSORS_ONLN);  // Get number of logical cores
+    printf("Using %d CPU threads for parallel sum\n", num_threads);
+
     // Create events for timing
     cudaEvent_t start, end;
     cudaEventCreate(&start);
