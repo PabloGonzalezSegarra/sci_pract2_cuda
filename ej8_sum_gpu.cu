@@ -92,7 +92,7 @@ int main(int argc, char **argv){
     printf("Sum kernel launched\n");
 
     // Compute out[i] = a[i] * sum_b
-    vector_pro<<<blocks, threadsPerBlock>>>(out_cuda, a_cuda, *result_cuda, N);
+    vector_pro<<<blocks, threadsPerBlock>>>(out_cuda, a_cuda, result_cuda, N);
 
     // End timing
     cudaEventRecord(end);
