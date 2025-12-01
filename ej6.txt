@@ -13,9 +13,9 @@ CPU:
     Best(4). 224690.438361 ms; 0.178023 GFLOPS
 
 GPU 256 threads/block:
-    1.
-    2.
-    3.
-    4.
-    5.
-    Best
+    1. 10333.632812 ms; 2583.4075 GFLOPS
+    2. 10465.818359 ms;  GFLOPS
+    3. 10696.263672 ms;  GFLOPS
+    4. 10909.836914 ms;  GFLOPS
+    5. 11034.091797 ms;  GFLOPS
+    Best(1).  10333.632812 ms; 2583.4075 GFLOPS

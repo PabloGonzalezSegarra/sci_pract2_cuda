@@ -38,8 +38,4 @@ int main(){
                         (t_end.tv_nsec - t_start.tv_nsec) / 1.0e6;
 
     printf("Elapsed time: %.6f ms\n", elapsed_ms);
-    double total_ops = (double)N * 10000 * 4;
-    double gflops = total_ops / (elapsed_ms * 1e6);
-    printf("GFLOPS: %.6f\n", gflops);
-
 }
