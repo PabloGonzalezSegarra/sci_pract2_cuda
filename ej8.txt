@@ -160,11 +160,49 @@ logicos de CPU, por lo que si el cuello de botella es la suma en CPU,
 en caso de disponer de mas nucleos logicos los tiempos de ejecucion
 de la version con suma parelelizada podria ser aun mejores. 
 
-    GPU suma de b secuencial:
+    GPU suma de b secuencial, threads per block: 256:
+        1. 132.585403 ms
+        2. 132.446945 ms
+        3. 133.262756 ms
+        4. 133.204987 ms
+        5. 133.118332 ms
+        Best. 132.446945 ms
 
-    GPU suma de b paralelizada (2 hilos en cpu):
 
-    GPU suma de b paralelizada (4 hilos en cpu):
+    GPU suma de b paralelizada Threads per block: 256:
 
-    GPU suma de b paralelizada (8 hilos en cpu):
-       
+        (2 hilos en cpu)
+            1. 69.534882 ms
+            2. 70.500160 ms
+            3. 71.490242 ms
+            4. 70.883423 ms
+            5. 69.307137 ms
+            Best. 69.307137 ms
+
+        (4 hilos en cpu)
+            1. 70.788574 ms
+            2. 70.078178 ms
+            3. 70.439232 ms
+            4. 70.490463 ms
+            5. 115.502174 ms
+            Best. 70.078178 ms
+
+        (8 hilos en cpu):
+            1. 112.941956 ms
+            2. 69.799904 ms
+            3. 70.015999 ms
+            4. 69.526878 ms
+            5. 69.549919 ms
+            Best. 69.526878 ms
+
+        (12 hilos en cpu):
+            1. 69.879745 ms
+            2. 69.744637 ms
+            3. 81.868095 ms
+            4. 70.707489 ms
+            5. 71.585411 ms
+            Best. 69.744637 ms
+    Best overall: 69.307137 ms (2 cpu threads)    
+    Speedup respecto suma secuencial: 1.91x
+
+
