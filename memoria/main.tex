@@ -137,8 +137,8 @@ A continuación se muestra el código modificado para variar el número de bloqu
 % 5
 \section*{Ejercicio 5}\addcontentsline{toc}{section}{Ejercicio 5}
 
-En este ejercicio se ha creado un kernel para la funcion \cppcode{void heavy_cpu(float* data, int n)}, el codigo
-se puede ver a continuacion:
+En este ejercicio se ha creado un kernel para la función \cppcode{void heavy_cpu(float* data, int n)}, el código.
+se puede ver a continuación:
 
 \begin{lstlisting}[
     language=CUDA, 
@@ -161,17 +161,17 @@ __global__ void heavy_cpu(float* data, int n) {
 % 6
 \section*{Ejercicio 6}\addcontentsline{toc}{section}{Ejercicio 6}
 
-Para este ejercicio se ha usado la misma metodologia que en los ejercicios anteriores, 
-pero esta vez se ha medido solo el tiempo de ejecucion del kernel, sin contar las 
+Para este ejercicio se ha usado la misma metodología que en los ejercicios anteriores, 
+pero esta vez se ha medido solo el tiempo de ejecución del kernel, sin contar las 
 transferencias de datos entre host y device.
-Se ha ejecutado la funcion en CPU y GPU, obteniendo los siguientes tiempos:
+Se ha ejecutado la función en CPU y GPU, obteniendo los siguientes tiempos:
 \begin{itemize}[topsep=0pt,itemsep=0pt]
     \item CPU: 224,69 s
     \item GPU: 10,33 s
 \end{itemize}
 
-Suponiendo que la funcion \cppcode{heavy_cpu} contiene 5 operaciones de coma flotante
-por iteracion del bucle, y considerando que el bucle se ejecuta 10.000 veces por cada
+Suponiendo que la función \cppcode{heavy_cpu} contiene 5 operaciones de coma flotante
+por iteración del bucle, y considerando que el bucle se ejecuta 10.000 veces por cada
 elemento del array, podemos calcular el número total de operaciones de coma flotante
 realizadas durante la ejecución de la función. Dado que el array tiene un tamaño de 
 N = 1.000.000, el número total de operaciones de coma flotante es:
@@ -186,19 +186,19 @@ Con estos datos, podemos calcular el rendimiento en GFLOPS para ambas ejecucione
 \end{itemize}   
 
 Estos resultados muestran una mejora significativa en el rendimiento al ejecutar
-la funcion en la GPU en comparación con la CPU. Obteniendo una aceleracion de 
+la función en la GPU en comparación con la CPU. Obteniendo una aceleración de 
 aproximadamente 21.6 veces.
 
 % 7
 \section*{Ejercicio 7}\addcontentsline{toc}{section}{Ejercicio 7}
 
-Cada hilo ejecuta el procesamiento de un elemento del array, es decir, obtine su 
+Cada hilo ejecuta el procesamiento de un elemento del array, es decir, obtiene su 
 índice, lee \cppcode{data[i]}, aplica el bucle de 10.000 iteraciones con el grueso de la carga
 computacional, y escribe el resultado de vuelta.
 
-En cuanto al paralelismo, se podria mejorar ligeramente retocando algunos detalles
-como los parametros de threads per block o blocks, pero en general no es posible aumentar
-significativmaente el paralelismo porque cada iteracion del bucle interno depende 
+En cuanto al paralelismo, se podría mejorar ligeramente retocando algunos detalles
+como los parámetros de threads per block o blocks, pero en general no es posible aumentar
+significativamente el paralelismo porque cada iteración del bucle interno depende 
 del valor anterior, por lo que esta dependencia impide paralelizar el bucle.
 
 
