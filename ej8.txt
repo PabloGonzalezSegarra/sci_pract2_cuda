@@ -218,3 +218,108 @@ de ejecucion del kernel, los resultados son devastadores:
     Success!
 
 Por lo que se va a proceder a realizar la suma en la GPU para evitar este cuello de botella.
+
+GPU Suma en GPU con atomicAdd, 256 threads per block for vector_pro, N = 100,000,000:
+    256 blocks for sum kernel:
+        128 threads per block (elements per thread: 3052):
+            1. 8.912928 ms
+            2. 8.863776 ms
+            3. 8.851488 ms
+            4. 8.863840 ms
+            5. 8.848352 ms
+            Best: 8.848352 ms
+
+        256 threads per block (elements per thread: 1526):
+            1. 9.357312 ms
+            2. 9.368416 ms
+            3. 9.295872 ms
+            4. 9.435104 ms
+            5. 9.383968 ms
+            Best: 9.295872 ms
+
+        512 threads per block (elements per thread: 763):
+            1. 9.627456 ms
+            2. 9.500640 ms
+            3. 9.553952 ms
+            4. 9.496576 ms
+            5. 9.431072 ms
+            Best: 9.431072 ms
+
+    512 blocks for sum kernel:
+        128 threads per block (elements per thread: 1526):
+            1. 9.017472 ms
+            2. 9.105408 ms
+            3. 9.057504 ms
+            4. 9.053408 ms
+            5. 9.305504 ms
+            Best: 9.017472 ms
+
+        256 threads per block (elements per thread: 763):
+            1. 9.275360 ms
+            2. 9.288256 ms
+            3. 9.417376 ms
+            4. 9.187328 ms
+            5. 9.308128 ms
+            Best: 9.187328 ms
+
+        512 threads per block (elements per thread: 382):
+            1. 9.132032 ms
+            2. 9.045408 ms
+            3. 9.090400 ms
+            4. 9.011296 ms
+            5. 9.055680 ms
+            Best: 9.011296 ms
+
+    1024 blocks for sum kernel:
+        128 threads per block (elements per thread: 763):
+            1. 9.112992 ms
+            2. 9.170368 ms
+            3. 9.120160 ms
+            4. 9.182752 ms
+            5. 9.320448 ms
+            Best: 9.112992 ms
+
+        256 threads per block (elements per thread: 382):
+            1. 8.888160 ms
+            2. 9.002976 ms
+            3. 8.964000 ms
+            4. 8.893568 ms
+            5. 8.945120 ms
+            Best: 8.888160 ms
+
+        512 threads per block (elements per thread: 191):
+            1. 8.990688 ms
+            2. 8.978880 ms
+            3. 8.988640 ms
+            4. 9.021568 ms
+            5. 8.968096 ms
+            Best: 8.968096 ms
+
+    2048 blocks for sum kernel:
+        128 threads per block (elements per thread: 382):
+            1. 8.935424 ms
+            2. 8.863744 ms
+            3. 8.914176 ms
+            4. 8.827424 ms
+            5. 8.851488 ms
+            Best: 8.827424 ms
+
+        256 threads per block (elements per thread: 191):
+            1. 8.823648 ms
+            2. 8.771712 ms
+            3. 8.866336 ms
+            4. 8.826880 ms
+            5. 8.775488 ms
+            Best: 8.771712 ms
+
+        512 threads per block (elements per thread: 96):
+            1. 12.595328 ms
+            2. 12.564768 ms
+            3. 12.580288 ms
+            4. 12.612288 ms
+            5. 12.313568 ms
+            Best: 12.313568 ms
+
+    Best overall: 8.771712 ms (2048 blocks, 256 threads per block, 191 elements per thread)
+    Speedup respecto suma CPU paralela (69.3 ms): 7.90x
+    Speedup respecto suma CPU secuencial (132.4 ms): 15.09x
