@@ -1,0 +1,63 @@
+Por lo que se va a proceder a realizar la suma en la GPU para evitar este cuello de botella.
+
+GPU Suma en GPU con atomicAdd, 256 threads per block for vector_pro, N = 100,000,000:
+
+    256 sum blocks:
+        128 threads per block (elements per thread: 3052):
+            Best: 9.058304 ms
+            GFLOPS: 22,079
+        256 threads per block (elements per thread: 1526):
+            Best:
+            GFLOPS:
+        512 threads per block (elements per thread: 763):
+            Best:
+            GFLOPS:
+        Best overall: 
+        GFLOPS:
+
+    512 sum blocks:
+        128 threads per block (elements per thread: 1526):
+            Best:
+            GFLOPS:
+        256 threads per block (elements per thread: 763):
+            Best:
+            GFLOPS:
+        512 threads per block (elements per thread: 382):
+            Best:
+            GFLOPS:
+        Best overall: 
+        GFLOPS:
+
+    1024 sum blocks:
+        128 threads per block (elements per thread: 763):
+            Best:
+            GFLOPS:
+        256 threads per block (elements per thread: 382):
+            Best:
+            GFLOPS:
+        512 threads per block (elements per thread: 191):
+            Best:   
+            GFLOPS:
+        Best overall:
+        GFLOPS:
+    
+    2048 sum blocks:
+        128 threads per block (elements per thread: 382):
+            Best:
+            GFLOPS:
+        256 threads per block (elements per thread: 191):
+            Best:
+            GFLOPS:
+        512 threads per block (elements per thread: 95):
+            Best:
+            GFLOPS:
+        Best overall:
+        GFLOPS:
+
+    Best overall configuration:
+    GFLOPS:
+    Speedup respecto a la suma secuencial en CPU: 
+    Speedup respecto a la suma paralelizada en CPU:
+            
+
+        
