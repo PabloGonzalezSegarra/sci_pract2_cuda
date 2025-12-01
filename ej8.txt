@@ -6,6 +6,7 @@ tamaño de N = 1,000,000 para que esta pueda
 resolver el problema en un tiempo razonable.
     CPU:
         1. 324755.684563 ms
+        GFLOPS: 6.158 GFLOPS
 
     GPU No optimizado:
 
@@ -16,6 +17,7 @@ resolver el problema en un tiempo razonable.
             4. 4473.990723 ms
             5. 4501.110352 ms
             Best. 4424.516113 ms
+            GFLOPS: 452 GFLOPS
 
         Threads per block: 128
             1. 4507.012207 ms
@@ -24,6 +26,7 @@ resolver el problema en un tiempo razonable.
             4. 4399.937500 ms
             5. 4432.089844 ms
             Best. 4357.568359 ms
+            GFLOPS: 459 GFLOPS
 
         Threads per block: 256
             1. 4453.189453 ms
@@ -32,6 +35,7 @@ resolver el problema en un tiempo razonable.
             4. 4504.888184 ms
             5. 4538.066895 ms
             Best. 4453.189453 ms
+            GFLOPS: 449 GFLOPS
 
         Threads per block: 512
             1. 4564.826660 ms
@@ -40,7 +44,9 @@ resolver el problema en un tiempo razonable.
             4. 4636.572754 ms
             5. 4672.068848 ms
             Best. 4564.826660 ms
+            GFLOPS: 438 GFLOPS
         Best overall: 4357.568359 ms (128 threads per block)
+        GFLOPS: 459 GFLOPS
         Speedup: 74.49x
 
     GPU Pre-Calculando la suma de b:
@@ -52,6 +58,7 @@ resolver el problema en un tiempo razonable.
             4. 1.452544 ms
             5. 1.471328 ms
             Best. 1.425184 ms
+            GFLOPS: 1379
 
         Threads per block: 128
             1. 1.448416 ms
@@ -60,6 +67,7 @@ resolver el problema en un tiempo razonable.
             4. 1.459488 ms
             5. 2.523968 ms
             Best. 1.448416 ms
+            GFLOPS: 1389
 
         Threads per block: 256
             1. 1.428288 ms
@@ -68,6 +76,7 @@ resolver el problema en un tiempo razonable.
             4. 1.433088 ms
             5. 1.458976 ms
             Best. 1.419712 ms
+            GFLOPS: 1416
 
         Threads per block: 512
             1. 3.028576 ms
@@ -77,7 +86,7 @@ resolver el problema en un tiempo razonable.
             5. 1.437600 ms
             Best. 1.437600 ms
         Best overall: 1.419712 ms (256 threads per block)
-        Speedup: 228.72x
+        Speedup: 228.96x
 
     GPU ILP optimization:
 

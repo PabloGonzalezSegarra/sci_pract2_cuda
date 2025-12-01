@@ -1,4 +1,4 @@
-#define N 1000000
+#define N 100000000
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,7 +53,7 @@ int main(int argc, char **argv){
     
     // Compute sum of b on CPU using double for precision
     double sum_b = 0.0;
-    for (int i = 0; i < N; i++) {
+    for (long i = 0; i < N; i++) {
         sum_b += b[i];
     }
     // Compute out[i] = a[i] * sum_b

@@ -10,167 +10,172 @@ cuantificar cual es la mejora que aporta cada una. Se va ejecutar
 cada optimizacion 5 veces, quedandonos con el mejor resultado
 de cada una. Se obtendra la aceleracion respecto a la CPU.
 
-CPU:
+CPU (FLOPS =  N * N * 2 / tiempo):
     1. 324755.684563 ms
+    GFLOPS: 6.15 
 
-GPU No optimizado:
+GPU No optimizado (FLOPS =  N * N * 2 / tiempo):
     Threads per block: 64
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 4552.622559 ms
+        2. 4453.951172 ms
+        3. 4470.878418 ms
+        4. 4503.976074 ms
+        5. 4547.502930 ms
+        Best: 4453.951172 ms
+        GFLOPS: 449.04 
 
     Threads per block: 128
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 4496.817383 ms
+        2. 4389.302734 ms
+        3. 4395.071289 ms
+        4. 4402.246094 ms
+        5. 4431.773438 ms
+        Best: 4389.302734 ms
+        GFLOPS: 455.66 
 
     Threads per block: 256
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 4437.092773 ms
+        2. 4435.747070 ms
+        3. 4446.516602 ms
+        4. 4463.307129 ms
+        5. 4463.086914 ms
+        Best: 4435.747070 ms
+        GFLOPS: 450.89 
 
     Threads per block: 512
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 4478.253418 ms
+        2. 4479.819336 ms
+        3. 4502.573730 ms
+        4. 4527.730957 ms
+        5. 4546.982422 ms
+        Best: 4478.253418 ms
+        GFLOPS: 446.61 
     
-    Best overall:  ms ( threads per block)
-    Speedup: x
+    Best overall: 4389.302734 ms (128 threads per block)
+    GFLOPS: 455.66
+    Speedup: 73.99x
 
-////////////// Datos GPU no optmizado ///////////////
-
-///////////// Fin Datos GPU no optimizado /////////////
-
-GPU Pre-Calculando la suma de b:
+GPU Pre-Calculando la suma de b (FLOPS = 2N / tiempo):
     Threads per block: 64
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.541568 ms
+        2. 1.714656 ms
+        3. 1.677600 ms
+        4. 1.427520 ms
+        5. 1.438656 ms
+        Best: 1.427520 ms
+        GFLOPS: 1,401 
 
     Threads per block: 128
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.423968 ms
+        2. 1.479712 ms
+        3. 1.422144 ms
+        4. 1.419200 ms
+        5. 1.417632 ms
+        Best: 1.417632 ms
+        GFLOPS: 1,411
 
     Threads per block: 256
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.432288 ms
+        2. 1.467776 ms
+        3. 1.447424 ms
+        4. 1.422080 ms
+        5. 1.430368 ms
+        Best: 1.422080 ms
+        GFLOPS: 1,406
 
     Threads per block: 512
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.475008 ms
+        2. 1.472768 ms
+        3. 1.409952 ms
+        4. 1.443168 ms
+        5. 1.430208 ms
+        Best: 1.409952 ms
+        GFLOPS: 1,420
     
-    Best overall:  ms ( threads per block)
-    Speedup: x
+    Best overall: 1.409952 ms (512 threads per block)
+    GFLOPS: 1,420
+    Speedup: 230325.53x
 
-////////////// Datos GPU Pre-Calculando la suma de b ///////////////
-
-///////////// Fin Datos GPU Pre-Calculando la suma de b /////////////
-
-GPU ILP optimization:
+GPU ILP optimization (FLOPS = 2N / tiempo):
     Threads per block: 64
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.526432 ms
+        2. 1.429280 ms
+        3. 1.439776 ms
+        4. 1.456032 ms
+        5. 1.436544 ms
+        Best: 1.429280 ms
+        GFLOPS: 1,394
 
     Threads per block: 128
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.596288 ms
+        2. 1.449440 ms
+        3. 1.475872 ms
+        4. 1.540960 ms
+        5. 1.475744 ms
+        Best: 1.449440 ms
+        GFLOPS: 1,375
 
     Threads per block: 256
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.434752 ms
+        2. 1.498208 ms
+        3. 1.443776 ms
+        4. 1.460128 ms
+        5. 1.437920 ms
+        Best: 1.434752 ms
+        GFLOPS: 1,409
 
     Threads per block: 512
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.462400 ms
+        2. 1.428832 ms
+        3. 1.442464 ms
+        4. 1.462560 ms
+        5. 1.443232 ms
+        Best: 1.428832 ms
+        GFLOPS: 1,404
     
-    Best overall:  ms ( threads per block)
-    Speedup: x
+    Best overall: 1.428832 ms (512 threads per block)
+    GFLOPS: 1,404
+    Speedup: 227307.89x
 
-////////////// Datos GPU ILP optimization ///////////////
-///////////// Fin Datos GPU ILP optimization /////////////
-
-GPU paralelized sum of b (2 hilos en cpu):
+GPU paralelized sum of b (2 hilos en cpu) (FLOPS = 2N / tiempo):
     Threads per block: 64
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.129376 ms
+        2. 1.314560 ms
+        3. 1.699968 ms
+        4. 0.950560 ms
+        5. 1.589600 ms
+        Best: 0.950560 ms
+        GFLOPS: 2,104
 
     Threads per block: 128
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.288672 ms
+        2. 1.614176 ms
+        3. 1.012960 ms
+        4. 1.607168 ms
+        5. 1.281824 ms
+        Best: 1.012960 ms
+        GFLOPS: 1,972
 
     Threads per block: 256
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 1.604960 ms
+        2. 1.608128 ms
+        3. 0.921888 ms
+        4. 1.626400 ms
+        5. 0.904800 ms
+        Best: 0.904800 ms
+        GFLOPS: 2,211
 
     Threads per block: 512
-        1. 
-        2. 
-        3. 
-        4. 
-        5.
-        Best.
+        1. 0.924672 ms
+        2. 1.673728 ms
+        3. 0.913408 ms
+        4. 1.610176 ms
+        5. 1.686688 ms
+        Best: 0.913408 ms
+        GFLOPS: 2,192
     
-    Best overall:  ms ( threads per block)
-    Speedup: x
+    Best overall: 0.904800 ms (256 threads per block)
+    GFLOPS: 2,211
+    Speedup: 359122.17x
 
-////////////// Datos GPU paralelized sum of b (2 hilos en cpu) ///////////////
-
-///////////// Fin Datos GPU paralelized sum of b (2 hilos en cpu) /////////////
-
-
-
+    

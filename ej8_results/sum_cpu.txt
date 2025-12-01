@@ -1,0 +1,23 @@
+Tamaño de N = 100,000,000
+Para comparar los tiempos de ejecucion entre las distintas versiones
+de optimizacion se ha usado un tamaño de N = 100,000,000 que permite
+obtener tiempos de ejecucion menos ruidosos en la GPU.
+Hay que tener en cuenta que la instancia de colab solo dispone de dos dos nucleos
+logicos de CPU, por lo que si el cuello de botella es la suma en CPU,
+en caso de disponer de mas nucleos logicos los tiempos de ejecucion
+de la version con suma parelelizada podria ser aun mejores. 
+
+
+
+
+
+Tras todos estos experimentos y descubrir que la instancia de la CPU de colab
+se ha hecho un desglose de tiempos entre el tiempo de sumar en paralelo y el Tiempo
+de ejecucion del kernel, los resultados son devastadores:
+    Using 390625 blocks of 256 threads
+    Using 2 CPU threads for parallel sum
+    Time elapsed (total): 69.301155 ms
+    - Parallel sum (CPU): 65.823135 ms
+    - Kernel execution (GPU): 3.469184 ms
+    Expected: 67108864.000000, Got: 67108864.000000
+    Success!
