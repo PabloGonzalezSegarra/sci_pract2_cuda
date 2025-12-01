@@ -21,7 +21,7 @@
 % Información de la práctica
 \newcommand{\autor}{Pablo González Segarra}
 \newcommand{\titulo}{Práctica 2}
-\newcommand{\subtitulo}{Parte 1: Compilando Programas en C}
+\newcommand{\subtitulo}{Programación y Optimización de Código en GPU}
 \newcommand{\fecha}{\today}
 \newcommand{\titulacion}{Máster Universitario en Ingeniería de Computadores y Redes}
 
@@ -244,14 +244,14 @@ y una aceleración de 73.99x respecto a la CPU.
 Analizando algebraicamente el kernel, se puede observar que este 
 ejecuta la siguiente operación matemática:
 \[
-out[i] = \sum_{j=0}^{N-1} a[i] * b[j]
+out[i] = \sum_{j=0}^{N-1} a[i] \cdot b[j]
 \]
 
 esta operación se puede simplificar algebraicamente precalculando la suma de b,
 lo que reduce la complejidad de la operación de $O(N^2)$ a $O(2N)$, de forma
 que obtenemos la siguiente operación:
 \[
-out[i] = a[i] * \left(\sum_{j=0}^{N-1} b[j]\right)
+out[i] = a[i] \cdot \left(\sum_{j=0}^{N-1} b[j]\right)
 \]  
 
 Lo que permite implementar un kernel mucho más eficiente:
@@ -359,7 +359,9 @@ los siguientes resultados:
 \end{table}
             
 A pesar de que las ganancias son significativas, especialmente respecto al kernel original,
-aún hay margen de mejora, pero estas se escapan de mis capacidades actuales.
+aún hay margen de mejora, pero estas se escapan de mis capacidades actuales. En general, se han
+realizado más experimentos y optimizaciones que se han omitido por brevedad. También se dispone 
+de todos los datos de las múltiples ejecuciones y configuraciones probadas, que se pueden proporcionar si es necesario. 
 
 \cleardoublepage
 \pagestyle{plain}
