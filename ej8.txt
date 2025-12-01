@@ -206,3 +206,15 @@ de la version con suma parelelizada podria ser aun mejores.
     Speedup respecto suma secuencial: 1.91x
 
 
+Tras todos estos experimentos y descubrir que la instancia de la CPU de colab
+se ha hecho un desglose de tiempos entre el tiempo de sumar en paralelo y el Tiempo
+de ejecucion del kernel, los resultados son devastadores:
+    Using 390625 blocks of 256 threads
+    Using 2 CPU threads for parallel sum
+    Time elapsed (total): 69.301155 ms
+    - Parallel sum (CPU): 65.823135 ms
+    - Kernel execution (GPU): 3.469184 ms
+    Expected: 67108864.000000, Got: 67108864.000000
+    Success!
+
+Por lo que se va a proceder a realizar la suma en la GPU para evitar este cuello de botella.
