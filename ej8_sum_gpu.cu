@@ -102,6 +102,9 @@ int main(int argc, char **argv){
     cudaMemcpy(out, out_cuda, sizeof(float) * N, cudaMemcpyDeviceToHost);
 
     // Verify first result: out[0] = a[0] * sum(b)
+    // Copy result back to host to verify
+    float sum_b;
+    cudaMemcpy(&sum_b, result_cuda, sizeof(float), cudaMemcpyDeviceToHost);
     float expected = a[0] * sum_b;
     printf("Expected: %f, Got: %f\n", expected, out[0]);
     if (fabsf(out[0] - expected) / expected > 1e-6f) {
