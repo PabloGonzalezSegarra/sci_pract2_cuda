@@ -6,7 +6,8 @@
 #include <cuda_runtime.h>
 
 // Kernel para suma: cada hilo suma una porción del vector y acumula con atomicAdd
-__global__ void sum_kernel(float *b, float *result, int n, int elements_per_thread) {
+// Usa double para precisión perfecta
+__global__ void sum_kernel(float *b, double *result, int n, int elements_per_thread) {
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
     int start = tid * elements_per_thread;
     
@@ -16,9 +17,9 @@ __global__ void sum_kernel(float *b, float *result, int n, int elements_per_thre
     int end = start + elements_per_thread;
     if (end > n) end = n;
     
-    float sum = 0.0f;
+    double sum = 0.0;
     for (int i = start; i < end; i++) {
-        sum += b[i];
+        sum += (double)b[i];
     }
     
     // Acumular suma parcial en el resultado global usando atomicAdd
@@ -26,11 +27,11 @@ __global__ void sum_kernel(float *b, float *result, int n, int elements_per_thre
 }
 
 // Kernel principal: out[i] = a[i] * sum(b)
-__global__ void vector_pro(float *out, float *a, float* sum_b, int n) {
+__global__ void vector_pro(float *out, float *a, double* sum_b, int n) {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     
     if (i < n) {
-        out[i] = a[i] * (*sum_b);
+        out[i] = a[i] * (float)(*sum_b);
     }
 }
 
@@ -72,10 +73,10 @@ int main(int argc, char **argv){
     
     int blocks = (N + threadsPerBlock - 1) / threadsPerBlock;
     
-    // Allocate memory for the result (single float) on GPU
-    float *result_cuda = NULL;
-    cudaMalloc((void**)&result_cuda, sizeof(float));
-    cudaMemset(result_cuda, 0, sizeof(float)); 
+    // Allocate memory for the result (single double) on GPU
+    double *result_cuda = NULL;
+    cudaMalloc((void**)&result_cuda, sizeof(double));
+    cudaMemset(result_cuda, 0, sizeof(double)); 
     
     // Print configuration
     printf("Using %d blocks of %d threads for vector_pro\n", blocks, threadsPerBlock);
@@ -114,8 +115,8 @@ int main(int argc, char **argv){
         sum_b += b[i];
     }
     // Compare with gpu calculated value
-    float gpu_sum_b;
-    cudaMemcpy(&gpu_sum_b, result_cuda, sizeof(float), cudaMemcpyDeviceToHost);
+    double gpu_sum_b;
+    cudaMemcpy(&gpu_sum_b, result_cuda, sizeof(double), cudaMemcpyDeviceToHost);
     printf("CPU sum: %f, GPU sum: %f\n", sum_b, gpu_sum_b);
 
     float expected = a[0] * sum_b;
