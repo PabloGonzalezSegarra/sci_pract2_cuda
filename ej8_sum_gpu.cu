@@ -109,7 +109,7 @@ int main(int argc, char **argv){
 
     // Verify first result: out[0] = a[0] * sum(b)
     // Copy result back to host to verify
-    float sum_b = 0.0f;
+    double sum_b = 0.0;
     for (long long i = 0; i < (long long)N; i++) {
         sum_b += b[i];
     }
