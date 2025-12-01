@@ -22,11 +22,11 @@ __global__ void sum_kernel(float *b, float *result, int n, int elements_per_thre
 }
 
 // Kernel principal: out[i] = a[i] * sum(b)
-__global__ void vector_pro(float *out, float *a, float sum_b, int n) {
+__global__ void vector_pro(float *out, float *a, float* sum_b, int n) {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     
     if (i < n) {
-        out[i] = a[i] * sum_b;
+        out[i] = a[i] * (*sum_b);
     }
 }
 
