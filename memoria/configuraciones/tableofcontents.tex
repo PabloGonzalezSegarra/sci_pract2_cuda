@@ -1,0 +1,36 @@
+% --- CONTADOR AUTOMÁTICO DE SECCIONES NUMERADAS ---
+\newcounter{numsecciones}
+% Guarda los comandos originales
+\let\oldsection\section
+\let\oldsubsection\subsection
+\let\oldsubsubsection\subsubsection
+
+\makeatletter
+% Redefine para contar solo si la sección es numerada
+\renewcommand{\section}{%
+  \@ifstar
+    % Si es con *, solo ejecuta el original (no cuenta)
+    {\oldsection*}
+    % Si es numerada, cuenta y ejecuta el original
+    {%
+      \stepcounter{numsecciones}%
+      \oldsection
+    }%
+}
+\renewcommand{\subsection}{%
+  \@ifstar
+    {\oldsubsection*}
+    {%
+      \stepcounter{numsecciones}%
+      \oldsubsection
+    }%
+}
+\renewcommand{\subsubsection}{%
+  \@ifstar
+    {\oldsubsubsection*}
+    {%
+      \stepcounter{numsecciones}%
+      \oldsubsubsection
+    }%
+}
+\makeatother

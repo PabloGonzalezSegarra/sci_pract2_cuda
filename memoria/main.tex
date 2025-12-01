@@ -1,0 +1,94 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[spanish]{babel}
+
+% Packages - Plantilla
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{titlesec}  % For title formatting
+\usepackage{tocloft}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0pt, label=\textbullet, itemsep=0pt}
+\usepackage{caption}
+\captionsetup[table]{name=Tabla}
+
+% Packages - User
+\input{configuraciones/code}  % Configuración para snippets de código C/C++/CUDA
+
+% Información de la práctica
+\newcommand{\autor}{Pablo González Segarra}
+\newcommand{\titulo}{Práctica 2}
+\newcommand{\subtitulo}{Parte 1: Compilando Programas en C}
+\newcommand{\fecha}{\today}
+\newcommand{\titulacion}{Máster Universitario en Ingeniería de Computadores y Redes}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\titulo}
+\fancyhead[R]{\thepage}
+\setlength{\headheight}{15pt}
+
+% Other configurations
+\geometry{margin=1in}
+\setlength{\parskip}{0.5\baselineskip}
+\setlength{\cftbeforesecskip}{0pt} % Espacio entre entradas del índice
+
+% Tittle page
+\input{tittle/tittle}
+
+% Document
+\begin{document}
+% Title Page
+\maketitle
+\thispagestyle{empty}
+\vfill
+
+% Table of Contents
+\setcounter{page}{1}  % Start counting from 1
+\tableofcontents
+\newpage
+
+% 1. Objective or Summary
+\section{Objective}
+This section should briefly describe the main goals and objectives of the lab report. 
+
+% 2. Problem Description
+\section{Problem Description}
+Provide a detailed description of the problems or tasks tackled in the lab. This can include circuit specifications\cite{lamport1994latex}, structures, or any other given challenges.
+
+% 3. Methodology/Design Procedures
+\section{Methodology}
+Detail the steps taken to design or implement the solution to the problem. Explain any algorithms, designs, or specific procedures used.\cite{knuth1984texbook}
+
+Este es el párrafo dos.\cite{latexproject} 
+
+% 4. Measurement/Testing Results
+\section{Measurement}
+Summarize the data gathered during the lab, including measurements and observations. You can use tables or figures to present this data.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{example-image} % Example of adding a figure
+    \caption{Test results for circuit 1}
+    \label{fig:circuit1}
+\end{figure}
+
+% 5. Analysis and Discussion
+\section{Analysis and Discussion}
+Interpret the results obtained. Compare them with theoretical values, explain discrepancies, and discuss their significance.
+
+% 6. Recommendations/Conclusions
+\section{Conclusions}
+Provide conclusions based on the results and discuss any recommendations for improvements, future work, or alternative solutions.
+
+\cleardoublepage
+\pagestyle{plain}
+% Bibliography (if required)
+\bibliographystyle{ieeetr}
+\bibliography{references.bib}  % Add a .bib file if you have references
+
+\end{document}

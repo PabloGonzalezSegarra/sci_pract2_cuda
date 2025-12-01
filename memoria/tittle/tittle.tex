@@ -1,0 +1,38 @@
+% Title Formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\author{\autor}
+\date{}
+
+% Cover Page
+\title{
+    \pagestyle{empty}
+    
+    \vspace{-2cm} % Adjust vertical space
+
+    \begin{figure}[ht]
+        \centering
+        \begin{minipage}[t]{0.3\textwidth}
+            \includegraphics[width=\linewidth]{tittle/UPV-Logo.png}
+            % \caption{Descripción de la imagen 1}
+        \end{minipage}%
+        \hfill
+        \begin{minipage}[t]{0.48\textwidth}
+            \vspace{-2cm}
+            \includegraphics[width=\linewidth]{tittle/ETSINF-Logo.png}
+            
+            % \caption{Descripción de la imagen 2}
+        \end{minipage}
+    \end{figure}
+
+    \vspace{0.3cm} % Adjust vertical space after the logo
+    
+    \textbf{
+    \Huge \titulo  \\% Título
+    {\Large \subtitulo}}\\ % Subtítulo
+    
+    \vspace{0.6cm} % Adjust vertical space
+    \large \titulacion \\
+    \vspace{0.3cm} % Adjust vertical space
+    \large \fecha
+}

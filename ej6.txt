@@ -1,21 +1,21 @@
 Suponemos que cosf y sinf se ejecutan en hardware como una unica operacion
-de coma flotante, por lo que se ejecutan N * 10000 * 4 operaciones
-de coma flotante en total. (Sin embargo, seria mejor comprobarlo en vez de 
-suponer algo que seguramente no es cierto).
+de coma flotante, por lo que se ejecutan N * 10000 * 5 operaciones
+de coma flotante en total. 
 
+Resultados obtenidos:
 
 CPU:
     1. 225730.731701 ms;
     2. 225775.363480 ms;
     3. 225413.030444 ms;
-    4. 224690.438361 ms; 0.178023 GFLOPS
+    4. 224690.438361 ms; 0.2225 GFLOPS
     5. 224934.833417 ms;
-    Best(4). 224690.438361 ms; 0.178023 GFLOPS
+    Best(4). 224690.438361 ms; 0.2225 GFLOPS
 
 GPU 256 threads/block:
-    1. 10333.632812 ms; 2583.4075 GFLOPS
-    2. 10465.818359 ms;  GFLOPS
-    3. 10696.263672 ms;  GFLOPS
-    4. 10909.836914 ms;  GFLOPS
-    5. 11034.091797 ms;  GFLOPS
-    Best(1).  10333.632812 ms; 2583.4075 GFLOPS
+    1. 10333.632812 ms; 4.8385 GFLOPS
+    2. 10465.818359 ms; 
+    3. 10696.263672 ms; 
+    4. 10909.836914 ms; 
+    5. 11034.091797 ms; 
+    Best(1).  10333.632812 ms; 4.8385 GFLOPS

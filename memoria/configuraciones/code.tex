@@ -1,0 +1,78 @@
+% ========== CÓDIGO FUENTE (C/C++/CUDA) ==========
+% Configuración de listings para mostrar snippets de código
+%
+% Uso:
+%   Inline: \code{int x = 5;} o \cudacode{__global__ void f()}
+%   Bloque:
+%     \begin{lstlisting}[language=CUDA, caption={Mi kernel}]
+%     __global__ void kernel() { ... }
+%     \end{lstlisting}
+%   Desde archivo:
+%     \lstinputlisting[language=CUDA, caption={...}]{../archivo.cu}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codeblue}{rgb}{0.13,0.13,1}
+\definecolor{codeorange}{rgb}{0.8,0.4,0}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.97}
+
+% Estilo base para código
+\lstdefinestyle{codestyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen}\itshape,
+    keywordstyle=\color{codeblue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codeorange},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=8pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+    framesep=3pt,
+    xleftmargin=15pt,
+    framexleftmargin=15pt,
+}
+
+% Definir lenguaje CUDA (extiende C++)
+\lstdefinelanguage{CUDA}[]{C++}{
+    morekeywords={__global__, __device__, __host__, __shared__, __constant__,
+                  __restrict__, __align__, __launch_bounds__,
+                  dim3, cudaError_t, cudaEvent_t, cudaStream_t,
+                  blockIdx, blockDim, threadIdx, gridDim, warpSize,
+                  cudaMalloc, cudaFree, cudaMemcpy, cudaMemcpyAsync,
+                  cudaMemcpyHostToDevice, cudaMemcpyDeviceToHost,
+                  cudaMemcpyDeviceToDevice, cudaMemcpyHostToHost,
+                  cudaDeviceSynchronize, cudaGetLastError, cudaGetErrorString,
+                  cudaEventCreate, cudaEventDestroy, cudaEventRecord,
+                  cudaEventSynchronize, cudaEventElapsedTime,
+                  cudaGetDeviceCount, cudaGetDeviceProperties, cudaSetDevice,
+                  atomicAdd, atomicSub, atomicExch, atomicMin, atomicMax,
+                  __syncthreads, __threadfence, __syncwarp,
+                  sinf, cosf, sqrtf, expf, logf, powf, fabsf},
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+    sensitive=true,
+}
+
+% Configuración por defecto
+\lstset{style=codestyle}
+
+% Comandos rápidos para código inline y bloques
+% Uso: \code{int x = 5;}
+\newcommand{\cppcode}[1]{\lstinline[language=C++]|#1|}
+
+% Uso: \cudacode{__global__ void kernel()}
+\newcommand{\cudacode}[1]{\lstinline[language=CUDA]|#1|}
