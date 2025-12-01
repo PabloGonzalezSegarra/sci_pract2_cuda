@@ -72,7 +72,7 @@ int main(int argc, char **argv){
     
     int blocks = (N + threadsPerBlock - 1) / threadsPerBlock;
     
-    // Allocate memory for the result (single double) on GPU
+    // Allocate memory for the result on GPU
     double *result_cuda = NULL;
     cudaMalloc((void**)&result_cuda, sizeof(double));
     cudaMemset(result_cuda, 0, sizeof(double)); 
@@ -93,8 +93,6 @@ int main(int argc, char **argv){
     // Compute sum of b on GPU using atomicAdd
     sum_kernel<<<sum_blocks, sumThreadsPerBlock>>>(b_cuda, result_cuda, N, elements_per_thread);
     
-    printf("Sum kernel launched\n");
-
     // Compute out[i] = a[i] * sum_b
     vector_pro<<<blocks, threadsPerBlock>>>(out_cuda, a_cuda, result_cuda, N);
 
@@ -107,10 +105,9 @@ int main(int argc, char **argv){
     
     cudaMemcpy(out, out_cuda, sizeof(float) * N, cudaMemcpyDeviceToHost);
 
-    // Verify first result: out[0] = a[0] * sum(b)
-    // Copy result back to host to verify
+    // Verify result
     double sum_b = 0.0;
-    for (long long i = 0; i < (long long)N; i++) {
+    for (int i = 0; i < N; i++) {
         sum_b += b[i];
     }
     // Compare with gpu calculated value

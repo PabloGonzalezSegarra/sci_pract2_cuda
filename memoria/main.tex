@@ -241,7 +241,7 @@ lo que da un rendimiento 455 GFLOPS, calculado de la siguiente manera:
 \]
 y una aceleración de 73.99x respecto a la CPU.
 
-Analizando algebráicamente la operación, se puede observar que la funcion 
+Analizando algebráicamente el kernel, se puede observar que este 
 ejecuta la siguiente operación matemática:
 \[
 out[i] = \sum_{j=0}^{N-1} a[i] * b[j]
@@ -282,13 +282,14 @@ ha calculado de la siguiente manera:
 Mi suposicion sobre el valore bajo de GFLOPS es que la GPU no está siendo
 suficientemente utilizada, ya que la operación es muy simple y no requiere
 muchos recursos computacionales (o lo estoy calculando mal, que siempre
-es una opcion :)). Por lo tanto, aunque el tiempo de ejecución
-es muy bajo, el número de operaciones por segundo no es tan alto como en la
+es una opcion :)). Por lo tanto, a pesar de la enorme reduccion en tiempo de ejecucion,
+el número de operaciones por segundo no es tan alto como en la
 versión anterior.
 
-Puesto que utilizar valores de N=1.000.000 es demasiado bajo para la optimizacion los valores
-tan bajos pueden estar siendo afectados por el ruido de la medicion de forma significativa, por 
-lo que se ha aumentado el valor de N a 100.000.000. Adicionalmente, es evidente que paralelizar 
+Con el objetivo de determinar de forma más precisa el rendimiento de la versión optimizada
+se ha aumentado el tamaño de N, ya que con N=1.000.000 los tiempos son muy pequeños y pequeñas
+variaciones pueden afectar significativamente los resultados. Por lo que se ha aumentado el 
+valor de N a 100.000.000. Adicionalmente, es evidente que paralelizar 
 la suma de b en la GPU puede aportar una mejora adicional, por lo que se ha implementado una version
 que paraleliza la suma de b en la GPU.
 
@@ -328,7 +329,6 @@ la suma de b en la GPU para intentar mejorar aún más el rendimiento.
 
 Para eso se ha implementado el siguiente codigo:
 
-A continuación se muestra el código modificado para variar el número de bloques e hilos por bloque:
 \lstinputlisting[
     language=CUDA, 
     style=codestyle, 
@@ -358,6 +358,8 @@ los siguientes resultados:
 \label{tab:mejor-suma-gpu}
 \end{table}
             
+A pesar de que las ganancias son significativas, especialmente respecto al kernel original,
+aun hay margen de mejora, pero estas se escapan de mis capacidades actuales.
 
 \cleardoublepage
 \pagestyle{plain}
