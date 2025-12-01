@@ -89,6 +89,8 @@ int main(int argc, char **argv){
     // Compute sum of b on GPU using atomicAdd
     sum_kernel<<<sum_blocks, sumThreadsPerBlock>>>(b_cuda, result_cuda, N, elements_per_thread);
     
+    printf("Sum kernel launched\n");
+
     // Compute out[i] = a[i] * sum_b
     vector_pro<<<blocks, threadsPerBlock>>>(out_cuda, a_cuda, *result_cuda, N);
 
