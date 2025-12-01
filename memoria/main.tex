@@ -192,7 +192,18 @@ aproximadamente 21.6 veces.
 % 7
 \section*{Ejercicio 7}\addcontentsline{toc}{section}{Ejercicio 7}
 
+Cada hilo ejecuta el procesamiento de un elemento del array, es decir, obtine su 
+índice, lee \cppcode{data[i]}, aplica el bucle de 10.000 iteraciones con el grueso de la carga
+computacional, y escribe el resultado de vuelta.
 
+En cuanto al paralelismo, se podria mejorar ligeramente retocando algunos detalles
+como los parametros de threads per block o blocks, pero en general no es posible aumentar
+significativmaente el paralelismo porque cada iteracion del bucle interno depende 
+del valor anterior, por lo que esta dependencia impide paralelizar el bucle.
+
+
+% 8 
+\section*{Ejercicio 8}\addcontentsline{toc}{section}{Ejercicio 8}
 
 \cleardoublepage
 \pagestyle{plain}
