@@ -6,7 +6,10 @@
 
 void vector_add(float *out, float *a, float *b, int n) {
     for(int i = 0; i < n; i++){
-        out[i] = a[i] + b[i];
+        out[i] = 0;
+        for (int j= 0; j<n; j++){
+            out[i] += a[i]*b[j];
+        }
     }
 }
 
@@ -14,19 +17,19 @@ int main(){
     float *a, *b, *out; 
     struct timespec t_start, t_end;
 
-    // Start timing the selected block (allocation + init + computation)
-    clock_gettime(CLOCK_MONOTONIC, &t_start);
-
+    
     // Allocate memory
     a   = (float*)malloc(sizeof(float) * N);
     b   = (float*)malloc(sizeof(float) * N);
     out = (float*)malloc(sizeof(float) * N);
-
+    
     // Initialize array
     for(int i = 0; i < N; i++){
         a[i] = 1.0f; b[i] = 2.0f;
     }
-
+    
+    // Start timing
+    clock_gettime(CLOCK_MONOTONIC, &t_start);
     // Main function
     vector_add(out, a, b, N);
 
@@ -38,6 +41,6 @@ int main(){
     printf("Elapsed time: %.6f ms\n", elapsed_ms);
 
     free(a);
-    free(b); 
+    free(b);
     free(out);
 }
