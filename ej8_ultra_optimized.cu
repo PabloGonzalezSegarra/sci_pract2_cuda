@@ -7,10 +7,6 @@
 #include <pthread.h>
 #include <unistd.h>
 
-// Each thread processes ELEMENTS_PER_THREAD elements to maximize ILP,
-// hiding memory latencies
-#define ELEMENTS_PER_THREAD 4
-
 // Structure for parallel sum arguments
 typedef struct {
     float *array;
@@ -66,14 +62,10 @@ float parallel_sum(float *array, int n) {
 
 // Kernel principal: out[i] = a[i] * sum(b)
 __global__ void vector_pro(float *out, float *a, float sum_b, int n) {
-    int idx = (blockIdx.x * blockDim.x + threadIdx.x) * ELEMENTS_PER_THREAD;
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
     
-    #pragma unroll
-    for (int k = 0; k < ELEMENTS_PER_THREAD; k++) {
-        int i = idx + k;
-        if (i < n) {
-            out[i] = a[i] * sum_b;
-        }
+    if (i < n) {
+        out[i] = a[i] * sum_b;
     }
 }
 
@@ -102,7 +94,7 @@ int main(int argc, char **argv){
     
     // threadsPerBlock is taken from argv[1] (assume valid integer provided)
     int threadsPerBlock = atoi(argv[1]);
-    int blocks = (N + threadsPerBlock * ELEMENTS_PER_THREAD - 1) / (threadsPerBlock * ELEMENTS_PER_THREAD);
+    int blocks = (N + threadsPerBlock - 1) / threadsPerBlock;
     // Print configuration
     printf("Using %d blocks of %d threads\n", blocks, threadsPerBlock);
 
