@@ -28,9 +28,8 @@ void* parallel_sum_thread(void *arg) {
     return NULL;
 }
 
-// Parallel sum using pthreads (one thread per logical CPU core)
-float parallel_sum(float *array, int n) {
-    int num_threads = sysconf(_SC_NPROCESSORS_ONLN);  // Get number of logical cores
+// Parallel sum using pthreads (configurable number of threads)
+float parallel_sum(float *array, int n, int num_threads) {
     pthread_t *threads = (pthread_t*)malloc(sizeof(pthread_t) * num_threads);
     SumThreadArgs *args = (SumThreadArgs*)malloc(sizeof(SumThreadArgs) * num_threads);
     
@@ -95,12 +94,13 @@ int main(int argc, char **argv){
     // threadsPerBlock is taken from argv[1] (assume valid integer provided)
     int threadsPerBlock = atoi(argv[1]);
     int blocks = (N + threadsPerBlock - 1) / threadsPerBlock;
+    
+    // Number of CPU threads for parallel sum from argv[2]
+    int cpu_threads = atoi(argv[2]);
+    
     // Print configuration
     printf("Using %d blocks of %d threads\n", blocks, threadsPerBlock);
-
-    // Print number of logical CPU cores
-    const int num_threads = sysconf(_SC_NPROCESSORS_ONLN);  // Get number of logical cores
-    printf("Using %d CPU threads for parallel sum\n", num_threads);
+    printf("Using %d CPU threads for parallel sum\n", cpu_threads);
 
     // Create events for timing
     cudaEvent_t start, end;
@@ -111,7 +111,7 @@ int main(int argc, char **argv){
     cudaEventRecord(start);
     
     // Compute sum of b on CPU using parallel threads
-    float sum_b = parallel_sum(b, N);
+    float sum_b = parallel_sum(b, N, cpu_threads);
     
     // Compute out[i] = a[i] * sum_b
     vector_pro<<<blocks, threadsPerBlock>>>(out_cuda, a_cuda, sum_b, N);

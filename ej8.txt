@@ -1,5 +1,4 @@
 
-
 Tiempo de ejecucion N = 1,000,000
 Con el objetivo de poder comparar los resultados
 de las optimizaciones con la CPU se ha usado un 
@@ -116,7 +115,7 @@ resolver el problema en un tiempo razonable.
         Best overall: 1.444512 ms (64 threads per block)
         Speedup: 224.99x
 
-    GPU paralelized sum of b:
+    GPU paralelized sum of b (2 hilos en cpu):
 
         Threads per block: 64
             1. 0.947136 ms
@@ -153,8 +152,19 @@ resolver el problema en un tiempo razonable.
         Speedup: 354.99x
 
 Tamaño de N = 100,000,000
-Para comparar 
+Para comparar los tiempos de ejecucion entre las distintas versiones
+de optimizacion se ha usado un tamaño de N = 100,000,000 que permite
+obtener tiempos de ejecucion menos ruidosos en la GPU.
+Hay que tener en cuenta que la instancia de colab solo dispone de dos dos nucleos
+logicos de CPU, por lo que si el cuello de botella es la suma en CPU,
+en caso de disponer de mas nucleos logicos los tiempos de ejecucion
+de la version con suma parelelizada podria ser aun mejores. 
+
     GPU suma de b secuencial:
 
-    GPU suma de b paralelizada:
+    GPU suma de b paralelizada (2 hilos en cpu):
+
+    GPU suma de b paralelizada (4 hilos en cpu):
+
+    GPU suma de b paralelizada (8 hilos en cpu):
        
