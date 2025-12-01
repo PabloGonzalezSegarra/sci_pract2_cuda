@@ -94,13 +94,13 @@ Siendo el mejor tiempo 5856.9 ms.
 % 4
 \section*{Ejercicio 4}\addcontentsline{toc}{section}{Ejercicio 4}
 
-Para comparar la aceleracion obtenida al ejecutar el código en la GPU frente a la CPU,
-primero se ha compilado y ejecutado la version original en CPU, obteniendo un tiempo mejor de
+Para comparar la aceleración obtenida al ejecutar el código en la GPU frente a la CPU,
+primero se ha compilado y ejecutado la versión original en CPU, obteniendo un tiempo mejor de
 992.6 ms.
 
-Para obtener los tiempos de ejecución en GPU con distintas configuraciones numero de bloques
+Para obtener los tiempos de ejecución en GPU con distintas configuraciones, número de bloques
 y hilos por bloque, se ha modificado el código del ejercicio 3 para variar estos parámetros. Todas las 
-configuraciones se han ejecutado multiples veces y se ha tomado el mejor tiempo de ejecución. En la 
+configuraciones se han ejecutado múltiples veces y se ha tomado el mejor tiempo de ejecución. En la 
 tabla \ref{tab:tiempos-speedup} se muestran los resultados obtenidos.
 
 \begin{table}[h!]
@@ -120,7 +120,7 @@ tabla \ref{tab:tiempos-speedup} se muestran los resultados obtenidos.
 \label{tab:tiempos-speedup}
 \end{table}
 
-Como se puede observar la parelelización en GPU ofrece una mejora significativa en el tiempo de
+Como se puede observar, la paralelización en GPU ofrece una mejora significativa en el tiempo de
 ejecución en comparación con la versión en CPU. El mejor rendimiento se obtiene con 256 hilos por bloque,
 logrando un speedup de aproximadamente 2.32 veces respecto a la ejecución en CPU. Sin embargo, la 
 mejora a partir de 16 hilos por bloque es marginal.
