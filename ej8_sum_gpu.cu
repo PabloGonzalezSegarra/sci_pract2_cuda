@@ -62,9 +62,9 @@ int main(int argc, char **argv){
     int sumThreadsPerBlock = atoi(argv[2]);
     
     // Calculate total threads and elements per thread for sum
-    int total_sum_threads = sumThreadsPerBlock * 1024;
+    int sum_blocks = (N + sumThreadsPerBlock - 1) / sumThreadsPerBlock;
+    int total_sum_threads = sumThreadsPerBlock * sum_blocks;
     int elements_per_thread = (N + total_sum_threads - 1) / total_sum_threads;
-    int sum_blocks = 1024;
     
     int blocks = (N + threadsPerBlock - 1) / threadsPerBlock;
     
