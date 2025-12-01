@@ -52,43 +52,51 @@
 \tableofcontents
 \newpage
 
-% 1. Objective or Summary
-\section{Objective}
+% 1
+\section*{Ejercicio 1}\addcontentsline{toc}{section}{Ejercicio 1}
 This section should briefly describe the main goals and objectives of the lab report. 
 
-% 2. Problem Description
-\section{Problem Description}
-Provide a detailed description of the problems or tasks tackled in the lab. This can include circuit specifications\cite{lamport1994latex}, structures, or any other given challenges.
+% 2
+\section*{Ejercicio 2}\addcontentsline{toc}{section}{Ejercicio 2}
 
-% 3. Methodology/Design Procedures
-\section{Methodology}
-Detail the steps taken to design or implement the solution to the problem. Explain any algorithms, designs, or specific procedures used.\cite{knuth1984texbook}
+\begin{table}[h!]
+\centering
+\begin{tabular}{lcc}
+    \hline
+	extbf{Versión} & \textbf{Tiempo de ejecución (ms)} & \textbf{Speedup GPU vs CPU} \\
+    \hline
+    1 thread / block & & \\
+    16 threads / block & & \\
+    32 threads / block & & \\
+    256 threads / block & & \\
+    \hline
+\end{tabular}
+\caption{Tiempos de ejecución y speedup para distintas configuraciones de hilos/ bloque}
+\label{tab:tiempos-speedup}
+\end{table}
 
-Este es el párrafo dos.\cite{latexproject} 
 
-% 4. Measurement/Testing Results
-\section{Measurement}
-Summarize the data gathered during the lab, including measurements and observations. You can use tables or figures to present this data.
+% 3
+\section*{Ejercicio 3}\addcontentsline{toc}{section}{Ejercicio 3}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{example-image} % Example of adding a figure
-    \caption{Test results for circuit 1}
-    \label{fig:circuit1}
-\end{figure}
+% 4
+\section*{Ejercicio 4}\addcontentsline{toc}{section}{Ejercicio 4}
+ 
+% 5
+\section*{Ejercicio 5}\addcontentsline{toc}{section}{Ejercicio 5}
 
-% 5. Analysis and Discussion
-\section{Analysis and Discussion}
-Interpret the results obtained. Compare them with theoretical values, explain discrepancies, and discuss their significance.
+% 6
+\section*{Ejercicio 6}\addcontentsline{toc}{section}{Ejercicio 6}
 
-% 6. Recommendations/Conclusions
-\section{Conclusions}
-Provide conclusions based on the results and discuss any recommendations for improvements, future work, or alternative solutions.
+% 7
+\section*{Ejercicio 7}\addcontentsline{toc}{section}{Ejercicio 7}
+
+
 
 \cleardoublepage
 \pagestyle{plain}
 % Bibliography (if required)
-\bibliographystyle{ieeetr}
-\bibliography{references.bib}  % Add a .bib file if you have references
+% \bibliographystyle{ieeetr}
+% \bibliography{references.bib}  % Add a .bib file if you have references
 
 \end{document}
