@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-void vector_add(float *out, float *a, float *b, int n) {
+void vector_pro(float *out, float *a, float *b, int n) {
     for(int i = 0; i < n; i++){
         out[i] = 0;
         for (int j= 0; j<n; j++){
@@ -31,7 +31,7 @@ int main(){
     // Start timing
     clock_gettime(CLOCK_MONOTONIC, &t_start);
     // Main function
-    vector_add(out, a, b, N);
+    vector_pro(out, a, b, N);
 
     // End timing
     clock_gettime(CLOCK_MONOTONIC, &t_end);
