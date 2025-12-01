@@ -9,11 +9,15 @@
 __global__ void sum_kernel(float *b, float *result, int n, int elements_per_thread) {
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
     int start = tid * elements_per_thread;
+    
+    // Early exit if this thread has no work to do
+    if (start >= n) return;
+    
     int end = start + elements_per_thread;
     if (end > n) end = n;
     
     float sum = 0.0f;
-    for (int i = start; i < end && i < n; i++) {
+    for (int i = start; i < end; i++) {
         sum += b[i];
     }
     
