@@ -110,7 +110,7 @@ int main(int argc, char **argv){
     // Verify first result: out[0] = a[0] * sum(b)
     // Copy result back to host to verify
     float sum_b = 0.0f;
-    for (int i = 0; i < N; i++) {
+    for (long i = 0; i < N; i++) {
         sum_b += b[i];
     }
     // Compare with gpu calculated value
