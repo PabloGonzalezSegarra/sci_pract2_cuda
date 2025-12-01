@@ -109,6 +109,11 @@ int main(int argc, char **argv){
     for (int i = 0; i < N; i++) {
         sum_b += b[i];
     }
+    // Compare with gpu calculated value
+    float gpu_sum_b;
+    cudaMemcpy(&gpu_sum_b, result_cuda, sizeof(float), cudaMemcpyDeviceToHost);
+    printf("CPU sum: %f, GPU sum: %f\n", sum_b, gpu_sum_b);
+
     float expected = a[0] * sum_b;
     printf("Expected: %f, Got: %f\n", expected, out[0]);
     if (fabsf(out[0] - expected) / expected > 1e-6f) {

@@ -320,6 +320,6 @@ GPU Suma en GPU con atomicAdd, 256 threads per block for vector_pro, N = 100,000
             5. 12.313568 ms
             Best: 12.313568 ms
 
-    Best overall: 8.771712 ms (2048 blocks, 256 threads per block, 191 elements per thread)
+    Best overall: 8.771712 ms (2048 sum blocks, 256 threads per block, 191 elements per thread)
     Speedup respecto suma CPU paralela (69.3 ms): 7.90x
     Speedup respecto suma CPU secuencial (132.4 ms): 15.09x
