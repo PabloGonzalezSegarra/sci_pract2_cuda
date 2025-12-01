@@ -18,7 +18,7 @@ typedef struct {
 // Thread function for parallel sum
 void* parallel_sum_thread(void *arg) {
     SumThreadArgs *args = (SumThreadArgs*)arg;
-    float sum = 0.0;
+    double sum = 0.0;
     
     for (int i = args->start; i < args->end; i++) {
         sum += args->array[i];

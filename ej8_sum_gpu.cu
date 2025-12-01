@@ -17,9 +17,9 @@ __global__ void sum_kernel(float *b, double *result, int n, int elements_per_thr
     int end = start + elements_per_thread;
     if (end > n) end = n;
     
-    double sum = 0.0;
+    float sum = 0.0;
     for (int i = start; i < end; i++) {
-        sum += (double)b[i];
+        sum += (float)b[i];
     }
     
     // Acumular suma parcial en el resultado global usando atomicAdd
