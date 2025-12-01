@@ -53,11 +53,54 @@
 \newpage
 
 % 1
-\section*{Ejercicio 1}\addcontentsline{toc}{section}{Ejercicio 1}
-This section should briefly describe the main goals and objectives of the lab report. 
+\section*{Ejercicio 1 y 2}\addcontentsline{toc}{section}{Ejercicio 1}
+Debido a la similitud entre los ejercicios 1 y 2, se presentan juntos en esta sección.
+A continuación se muestra el código modificado necesario para ejecutar el programa
+en la GPU utilizando CUDA y comprobar que los resultados son correctos.
+\lstinputlisting[
+    language=CUDA, 
+    style=codestyle, 
+    caption={Código CUDA modificado para ejecutar en GPU}
+    ]
+    {../ej_1_y_2.cu}
 
-% 2
-\section*{Ejercicio 2}\addcontentsline{toc}{section}{Ejercicio 2}
+% 3
+\section*{Ejercicio 3}\addcontentsline{toc}{section}{Ejercicio 3}
+
+El codigo modificado para poder obtener los tiempos de ejecución es el siguiente:
+
+\lstinputlisting[
+    language=CUDA, 
+    style=codestyle, 
+    caption={Código CUDA modificado para medir tiempos de ejecución}
+    ]
+    {../ej3.cu}
+
+Se ha ejecutado 5 veces para evitar variaciones ajenas al rendimiento del código. El tiempo de 
+ejecucion tiene en cuenta tanto la transferencia de datos entre host y device como la 
+ejecución del kernel.
+
+Resultado de las ejecuciones:
+\begin{enumerate}[topsep=0pt,itemsep=0pt]
+    \item 5887.4 ms
+    \item 5864.1 ms
+    \item 5918.6 ms
+    \item 5856.9 ms
+    \item 5868.1 ms
+\end{enumerate}
+
+Siendo el mejor tiempo 5856.9 ms.
+
+% 4
+\section*{Ejercicio 4}\addcontentsline{toc}{section}{Ejercicio 4}
+
+Para comparar la aceleracion obtenida al ejecutar el código en la GPU frente a la CPU,
+primero se ha compilado y ejecutado la version original en CPU, obteniendo un tiempo mejor de
+992.6 ms.
+
+Para obtener los tiempos de ejecución en GPU con distintas configuraciones numero de bloques
+y hilos por bloque, se ha modificado el código del ejercicio 3 para variar estos parámetros. Todas las 
+configuraciones se han ejecutardo
 
 \begin{table}[h!]
 \centering
@@ -74,13 +117,6 @@ This section should briefly describe the main goals and objectives of the lab re
 \caption{Tiempos de ejecución y speedup para distintas configuraciones de hilos/ bloque}
 \label{tab:tiempos-speedup}
 \end{table}
-
-
-% 3
-\section*{Ejercicio 3}\addcontentsline{toc}{section}{Ejercicio 3}
-
-% 4
-\section*{Ejercicio 4}\addcontentsline{toc}{section}{Ejercicio 4}
  
 % 5
 \section*{Ejercicio 5}\addcontentsline{toc}{section}{Ejercicio 5}
