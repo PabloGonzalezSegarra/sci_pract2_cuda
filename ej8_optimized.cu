@@ -51,8 +51,8 @@ int main(int argc, char **argv){
     // Start timing
     cudaEventRecord(start);
     
-    // Compute sum of b on CPU 
-    float sum_b = 0.0f;
+    // Compute sum of b on CPU using double for precision
+    double sum_b = 0.0;
     for (int i = 0; i < N; i++) {
         sum_b += b[i];
     }

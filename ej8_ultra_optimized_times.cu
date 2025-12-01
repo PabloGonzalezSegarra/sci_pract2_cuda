@@ -12,13 +12,13 @@ typedef struct {
     float *array;
     int start;
     int end;
-    float partial_sum;
+    double partial_sum;
 } SumThreadArgs;
 
 // Thread function for parallel sum
 void* parallel_sum_thread(void *arg) {
     SumThreadArgs *args = (SumThreadArgs*)arg;
-    float sum = 0.0f;
+    double sum = 0.0;
     
     for (int i = args->start; i < args->end; i++) {
         sum += args->array[i];
@@ -29,7 +29,7 @@ void* parallel_sum_thread(void *arg) {
 }
 
 // Parallel sum using pthreads (configurable number of threads)
-float parallel_sum(float *array, int n, int num_threads) {
+double parallel_sum(float *array, int n, int num_threads) {
     pthread_t *threads = (pthread_t*)malloc(sizeof(pthread_t) * num_threads);
     SumThreadArgs *args = (SumThreadArgs*)malloc(sizeof(SumThreadArgs) * num_threads);
     
@@ -41,13 +41,13 @@ float parallel_sum(float *array, int n, int num_threads) {
         args[t].start = t * chunk_size;
         args[t].end = (t + 1) * chunk_size;
         if (args[t].end > n) args[t].end = n;
-        args[t].partial_sum = 0.0f;
+        args[t].partial_sum = 0.0;
         
         pthread_create(&threads[t], NULL, parallel_sum_thread, &args[t]);
     }
     
     // Wait for all threads and accumulate results
-    float total_sum = 0.0f;
+    double total_sum = 0.0;
     for (int t = 0; t < num_threads; t++) {
         pthread_join(threads[t], NULL);
         total_sum += args[t].partial_sum;
@@ -118,7 +118,7 @@ int main(int argc, char **argv){
     
     // Compute sum of b on CPU using parallel threads
     cudaEventRecord(sum_start);
-    float sum_b = parallel_sum(b, N, cpu_threads);
+    double sum_b = parallel_sum(b, N, cpu_threads);
     cudaEventRecord(sum_end);
     
     // Compute out[i] = a[i] * sum_b

@@ -1,0 +1,176 @@
+
+Tiempo de ejecucion N = 1,000,000
+Con el objetivo de poder comparar los resultados
+de las optimizaciones con la CPU se ha usado un 
+tamaño de N = 1,000,000 para que esta pueda 
+resolver el problema en un tiempo razonable.
+
+Tras identficar varias optimizaciones basicas, el objetivo es
+cuantificar cual es la mejora que aporta cada una. Se va ejecutar
+cada optimizacion 5 veces, quedandonos con el mejor resultado
+de cada una. Se obtendra la aceleracion respecto a la CPU.
+
+CPU:
+    1. 324755.684563 ms
+
+GPU No optimizado:
+    Threads per block: 64
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 128
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 256
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 512
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+    
+    Best overall:  ms ( threads per block)
+    Speedup: x
+
+////////////// Datos GPU no optmizado ///////////////
+
+///////////// Fin Datos GPU no optimizado /////////////
+
+GPU Pre-Calculando la suma de b:
+    Threads per block: 64
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 128
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 256
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 512
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+    
+    Best overall:  ms ( threads per block)
+    Speedup: x
+
+////////////// Datos GPU Pre-Calculando la suma de b ///////////////
+
+///////////// Fin Datos GPU Pre-Calculando la suma de b /////////////
+
+GPU ILP optimization:
+    Threads per block: 64
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 128
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 256
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 512
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+    
+    Best overall:  ms ( threads per block)
+    Speedup: x
+
+////////////// Datos GPU ILP optimization ///////////////
+///////////// Fin Datos GPU ILP optimization /////////////
+
+GPU paralelized sum of b (2 hilos en cpu):
+    Threads per block: 64
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 128
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 256
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+
+    Threads per block: 512
+        1. 
+        2. 
+        3. 
+        4. 
+        5.
+        Best.
+    
+    Best overall:  ms ( threads per block)
+    Speedup: x
+
+////////////// Datos GPU paralelized sum of b (2 hilos en cpu) ///////////////
+
+///////////// Fin Datos GPU paralelized sum of b (2 hilos en cpu) /////////////
+
+
+
