@@ -1,0 +1,14 @@
+
+Solo resonder con el kernel
+
+__global__ void heavy_cpu(float* data, int n) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (i < n) {
+        float x = data[i];
+        for (int j = 0; j < 10000; j++) {
+            x = sinf(x) * 1.00001f + cosf(x) * 0.99999f;
+        }
+        data[i] = x;
+    }
+}
