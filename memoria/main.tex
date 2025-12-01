@@ -205,7 +205,7 @@ del valor anterior, por lo que esta dependencia impide paralelizar el bucle.
 % 8 
 \section*{Ejercicio 8}\addcontentsline{toc}{section}{Ejercicio 8}
 
-En primer lugar, se ha medido el rendimiento ejecutando la funcion en la 
+En primer lugar, se ha medido el rendimiento ejecutando la función en la 
 CPU. Para esto se ha usado N = 1000000, para permitir que el procesador 
 termine en un tiempo razonable. Se ha obtenido un tiempo de ejecución
 de 324 segundos, lo que da un rendimiento de 16,158 GFLOPS calculado de
@@ -234,22 +234,22 @@ __global__ void vector_pro(float *out, float *a, float *b, int n) {
 }
 \end{lstlisting}
 
-Con la que se obtiene un timepo de ejecución 4389 ms, para 128 threads per block, 
-lo que da un rendimiento 455 GFLOPS, calculado de la siguiente manera:
+Con la que se obtiene un tiempo de ejecución de 4389 ms, para 128 threads per block, 
+lo que da un rendimiento de 455 GFLOPS, calculado de la siguiente manera:
 \[
 \text{FLOPS} = \frac{2N^2}{\text{tiempo}} = \frac{2 \cdot (10^6)^2}{4.389} \approx 455 \text{ GFLOPS}
 \]
 y una aceleración de 73.99x respecto a la CPU.
 
-Analizando algebráicamente el kernel, se puede observar que este 
+Analizando algebraicamente el kernel, se puede observar que este 
 ejecuta la siguiente operación matemática:
 \[
 out[i] = \sum_{j=0}^{N-1} a[i] * b[j]
 \]
 
-esta operacion se puede simplificar algebráicamente precalculando la suma de b,
+esta operación se puede simplificar algebraicamente precalculando la suma de b,
 lo que reduce la complejidad de la operación de $O(N^2)$ a $O(2N)$, de forma
-que obtenemos la siguiente operacion:
+que obtenemos la siguiente operación:
 \[
 out[i] = a[i] * \left(\sum_{j=0}^{N-1} b[j]\right)
 \]  
@@ -279,10 +279,10 @@ ha calculado de la siguiente manera:
 \text{FLOPS} = \frac{2N}{\text{tiempo}} = \frac{2 \cdot (10^6)}{0.0009048} \approx 22,9 \text{ GFLOPS}
 \]  
 
-Mi suposicion sobre el valore bajo de GFLOPS es que la GPU no está siendo
+Mi suposición sobre el valor bajo de GFLOPS es que la GPU no está siendo
 suficientemente utilizada, ya que la operación es muy simple y no requiere
 muchos recursos computacionales (o lo estoy calculando mal, que siempre
-es una opcion :)). Por lo tanto, a pesar de la enorme reduccion en tiempo de ejecucion,
+es una opción :)). Por lo tanto, a pesar de la enorme reducción en tiempo de ejecución,
 el número de operaciones por segundo no es tan alto como en la
 versión anterior.
 
@@ -299,13 +299,13 @@ Se han obtenido los siguientes resultados para 256 threads per block(la mejor co
     \item Versión paralelizada (2 threads \footnotemark): 69.5 ms
 \end{itemize}
 \footnotetext{Se han usado 2 threads en la CPU para paralelizar la suma de b, ya que el equipo
-solo dispone de 2 núcleos físicos. Se han realizando experimentos con 4, 8 y 12 threads, pero el rendimiento
+solo dispone de 2 núcleos físicos. Se han realizado experimentos con 4, 8 y 12 threads, pero el rendimiento
 empeoraba debido al overhead de gestión de los hilos.}
 
-Vemos como la versión paralelizada ofrece una aceleración de 1.916x respecto a la versión
+Vemos cómo la versión paralelizada ofrece una aceleración de 1.916x respecto a la versión
 que realiza la suma de b de forma secuencial en la CPU. Esto hace pensar que el cuello de 
-botella en la versión optimizada es la suma de b, por lo que se hize un análisis más detallado
-de los tiempos de ejecución, cullos resultados se muestran a continuación:
+botella en la versión optimizada es la suma de b, por lo que se hizo un análisis más detallado
+de los tiempos de ejecución, cuyos resultados se muestran a continuación:
 
 \begin{table}[h!]
 \centering
@@ -323,11 +323,11 @@ de los tiempos de ejecución, cullos resultados se muestran a continuación:
 \label{tab:desglose-tiempos-ej8}
 \end{table}
  
-De todos los resultado obtenidos, es trivial observar que la suma de b es el cuello de botella y 
+De todos los resultados obtenidos, es trivial observar que la suma de b es el cuello de botella y 
 que paralelizarla en la CPU aporta una mejora significativa. Por lo que se podría intentar paralelizar
 la suma de b en la GPU para intentar mejorar aún más el rendimiento.
 
-Para eso se ha implementado el siguiente codigo:
+Para eso se ha implementado el siguiente código:
 
 \lstinputlisting[
     language=CUDA, 
@@ -336,7 +336,7 @@ Para eso se ha implementado el siguiente codigo:
     ]
     {../ej8_sum_gpu.cu}
 
-Como en los otros casos se han probado un amplio rango de configuraciones, obteniendo el mejor resultado
+Como en los otros casos, se ha probado un amplio rango de configuraciones, obteniendo el mejor resultado
 con 2048 bloques de sumas parciales y 256 threads per block, lo que nos da 191 elementos por hilo. Se han obtenidos
 los siguientes resultados:
 
@@ -359,7 +359,7 @@ los siguientes resultados:
 \end{table}
             
 A pesar de que las ganancias son significativas, especialmente respecto al kernel original,
-aun hay margen de mejora, pero estas se escapan de mis capacidades actuales.
+aún hay margen de mejora, pero estas se escapan de mis capacidades actuales.
 
 \cleardoublepage
 \pagestyle{plain}
