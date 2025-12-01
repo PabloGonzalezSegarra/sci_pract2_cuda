@@ -205,6 +205,160 @@ del valor anterior, por lo que esta dependencia impide paralelizar el bucle.
 % 8 
 \section*{Ejercicio 8}\addcontentsline{toc}{section}{Ejercicio 8}
 
+En primer lugar, se ha medido el rendimiento ejecutando la funcion en la 
+CPU. Para esto se ha usado N = 1000000, para permitir que el procesador 
+termine en un tiempo razonable. Se ha obtenido un tiempo de ejecución
+de 324 segundos, lo que da un rendimiento de 16,158 GFLOPS calculado de
+la siguiente manera:
+\[
+\text{FLOPS} = \frac{2N^2}{\text{tiempo}} = \frac{2 \cdot (10^6)^2}{324} \approx 6,158 \text{ GFLOPS}
+\]
+
+
+La primera optimización que se ha realizado es el uso de la GPU, por lo que se 
+ha implementado el kernel siguiente:
+
+\begin{lstlisting}[
+    language=CUDA, 
+    style=codestyle, 
+    caption={Código CUDA del kernel para la función vector\_pro}
+    ]
+__global__ void vector_pro(float *out, float *a, float *b, int n) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i < n) {
+        out[i] = 0;
+        for (int j= 0; j<n; j++){
+            out[i] += a[i]*b[j];
+        }
+    }
+}
+\end{lstlisting}
+
+Con la que se obtiene un timepo de ejecución 4389 ms, para 128 threads per block, 
+lo que da un rendimiento 455 GFLOPS, calculado de la siguiente manera:
+\[
+\text{FLOPS} = \frac{2N^2}{\text{tiempo}} = \frac{2 \cdot (10^6)^2}{4.389} \approx 455 \text{ GFLOPS}
+\]
+y una aceleración de 73.99x respecto a la CPU.
+
+Analizando algebráicamente la operación, se puede observar que la funcion 
+ejecuta la siguiente operación matemática:
+\[
+out[i] = \sum_{j=0}^{N-1} a[i] * b[j]
+\]
+
+esta operacion se puede simplificar algebráicamente precalculando la suma de b,
+lo que reduce la complejidad de la operación de $O(N^2)$ a $O(2N)$, de forma
+que obtenemos la siguiente operacion:
+\[
+out[i] = a[i] * \left(\sum_{j=0}^{N-1} b[j]\right)
+\]  
+
+Lo que permite implementar un kernel mucho más eficiente:
+\begin{lstlisting}[
+    language=CUDA, 
+    style=codestyle, 
+    caption={Código CUDA del kernel optimizado para la función vector\_pro}
+    ]
+__global__ void vector_pro(float *out, float *a, float sum_b, int n) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    
+    if (i < n) {
+        out[i] = a[i] * sum_b;
+    }
+}
+\end{lstlisting}
+
+La suma de b se calcula previamente en la CPU y se pasa como parámetro al kernel. De
+esta forma se obtiene un tiempo de ejecución de 0.9048 ms, para 256 threads per block,
+lo que representa una aceleración de 359122.17x respecto a la CPU, lo que es realmente
+sorprendente. Sin embargo al calcular el rendimiento en GFLOPS obtenemos un valor de 
+22,9 GFLOPS, que es mucho menor que el obtenido en la versión anterior. El valor se 
+ha calculado de la siguiente manera:
+\[
+\text{FLOPS} = \frac{2N}{\text{tiempo}} = \frac{2 \cdot (10^6)}{0.0009048} \approx 22,9 \text{ GFLOPS}
+\]  
+
+Mi suposicion sobre el valore bajo de GFLOPS es que la GPU no está siendo
+suficientemente utilizada, ya que la operación es muy simple y no requiere
+muchos recursos computacionales (o lo estoy calculando mal, que siempre
+es una opcion :)). Por lo tanto, aunque el tiempo de ejecución
+es muy bajo, el número de operaciones por segundo no es tan alto como en la
+versión anterior.
+
+Puesto que utilizar valores de N=1.000.000 es demasiado bajo para la optimizacion los valores
+tan bajos pueden estar siendo afectados por el ruido de la medicion de forma significativa, por 
+lo que se ha aumentado el valor de N a 100.000.000. Adicionalmente, es evidente que paralelizar 
+la suma de b en la GPU puede aportar una mejora adicional, por lo que se ha implementado una version
+que paraleliza la suma de b en la GPU.
+
+Se han obtenido los siguientes resultados para 256 threads per block(la mejor configuración):
+\begin{itemize}[topsep=0pt,itemsep=2pt]
+    \item Versión secuencial: 133.5 ms
+    \item Versión paralelizada (2 threads \footnotemark): 69.5 ms
+\end{itemize}
+\footnotetext{Se han usado 2 threads en la CPU para paralelizar la suma de b, ya que el equipo
+solo dispone de 2 núcleos físicos. Se han realizando experimentos con 4, 8 y 12 threads, pero el rendimiento
+empeoraba debido al overhead de gestión de los hilos.}
+
+Vemos como la versión paralelizada ofrece una aceleración de 1.916x respecto a la versión
+que realiza la suma de b de forma secuencial en la CPU. Esto hace pensar que el cuello de 
+botella en la versión optimizada es la suma de b, por lo que se hize un análisis más detallado
+de los tiempos de ejecución, cullos resultados se muestran a continuación:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lcc}
+    \hline
+    \textbf{Fase} & \textbf{Tiempo (ms)} & \textbf{Porcentaje del total} \\
+    \hline
+    Suma paralela (CPU) & 69.15 & 95.2\% \\
+    Ejecución kernel (GPU) & 3.50 & 4.8\% \\
+    \hline
+    \textbf{Total} & 72.66 & 100\% \\
+    \hline
+\end{tabular}
+\caption{Desglose de tiempos de ejecución para N=100.000.000, suma paralela en CPU y kernel en GPU.}
+\label{tab:desglose-tiempos-ej8}
+\end{table}
+ 
+De todos los resultado obtenidos, es trivial observar que la suma de b es el cuello de botella y 
+que paralelizarla en la CPU aporta una mejora significativa. Por lo que se podría intentar paralelizar
+la suma de b en la GPU para intentar mejorar aún más el rendimiento.
+
+Para eso se ha implementado el siguiente codigo:
+
+A continuación se muestra el código modificado para variar el número de bloques e hilos por bloque:
+\lstinputlisting[
+    language=CUDA, 
+    style=codestyle, 
+    caption={Código CUDA para paralelizar la suma de b en GPU}
+    ]
+    {../ej8_sum_gpu.cu}
+
+Como en los otros casos se han probado un amplio rango de configuraciones, obteniendo el mejor resultado
+con 2048 bloques de sumas parciales y 256 threads per block, lo que nos da 191 elementos por hilo. Se han obtenidos
+los siguientes resultados:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lcc}
+    \hline
+    \textbf{Configuración} & \textbf{Tiempo (ms)} & \textbf{GFLOPS} \\
+    \hline
+    2048 bloques, 256 threads/block, 191 elem/thread & 8.645 & 23,168 \\
+    \hline
+    \textbf{Speedup} & \textbf{Respecto a} & \textbf{Factor} \\
+    \hline
+    Suma secuencial en CPU & 133.53 ms & 15.44x \\
+    Suma paralelizada en CPU & 69.15 ms & 8.00x \\
+    \hline
+\end{tabular}
+\caption{Mejor configuración para la suma en GPU con atomicAdd, N=100.000.000}
+\label{tab:mejor-suma-gpu}
+\end{table}
+            
+
 \cleardoublepage
 \pagestyle{plain}
 % Bibliography (if required)

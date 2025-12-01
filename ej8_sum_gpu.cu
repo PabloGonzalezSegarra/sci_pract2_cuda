@@ -1,12 +1,11 @@
-#define N 100000000
+#define N 1000000000
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <cuda_runtime.h>
 
-// Kernel para suma: cada hilo suma una porción del vector y acumula con atomicAdd
-// Usa double para precisión perfecta
+// Kernel for sum: each thread sums a portion of the vector and accumulates with atomicAdd
 __global__ void sum_kernel(float *b, double *result, int n, int elements_per_thread) {
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
     int start = tid * elements_per_thread;
@@ -22,11 +21,11 @@ __global__ void sum_kernel(float *b, double *result, int n, int elements_per_thr
         sum += (float)b[i];
     }
     
-    // Acumular suma parcial en el resultado global usando atomicAdd
+    // Accumulate partial sum in the global result using atomicAdd
     atomicAdd(result, sum);
 }
 
-// Kernel principal: out[i] = a[i] * sum(b)
+// Main kernel: out[i] = a[i] * sum(b)
 __global__ void vector_pro(float *out, float *a, double* sum_b, int n) {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     

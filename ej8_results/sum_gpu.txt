@@ -4,60 +4,59 @@ GPU Suma en GPU con atomicAdd, 256 threads per block for vector_pro, N = 100,000
 
     256 sum blocks:
         128 threads per block (elements per thread: 3052):
-            Best: 9.058304 ms
-            GFLOPS: 22,079
+            Best: 8.746848 ms
+            GFLOPS: 22,910
         256 threads per block (elements per thread: 1526):
-            Best:
-            GFLOPS:
+            Best: 9.125888 ms
+            GFLOPS: 21,919
         512 threads per block (elements per thread: 763):
-            Best:
-            GFLOPS:
-        Best overall: 
-        GFLOPS:
+            Best: 9.707520 ms
+            GFLOPS: 20,603
+        Best overall: 8.746848 ms
+        GFLOPS: 22,910
 
     512 sum blocks:
         128 threads per block (elements per thread: 1526):
-            Best:
-            GFLOPS:
+            Best: 8.827840 ms
+            GFLOPS: 22,660
         256 threads per block (elements per thread: 763):
-            Best:
-            GFLOPS:
+            Best: 8.830592 ms
+            GFLOPS: 22,651
         512 threads per block (elements per thread: 382):
-            Best:
-            GFLOPS:
-        Best overall: 
-        GFLOPS:
+            Best: 9.132736 ms
+            GFLOPS: 21,892
+        Best overall: 8.827840 ms
+        GFLOPS: 22,660
 
     1024 sum blocks:
         128 threads per block (elements per thread: 763):
-            Best:
-            GFLOPS:
+            Best: 8.704256 ms
+            GFLOPS: 23,026
         256 threads per block (elements per thread: 382):
-            Best:
-            GFLOPS:
+            Best: 8.759296 ms
+            GFLOPS: 22,881
         512 threads per block (elements per thread: 191):
-            Best:   
-            GFLOPS:
-        Best overall:
-        GFLOPS:
+            Best: 9.123136 ms
+            GFLOPS: 21,924
+        Best overall: 8.704256 ms
+        GFLOPS: 23,026
     
     2048 sum blocks:
         128 threads per block (elements per thread: 382):
-            Best:
-            GFLOPS:
+            Best: 8.748224 ms
+            GFLOPS: 22,903
         256 threads per block (elements per thread: 191):
-            Best:
-            GFLOPS:
+            Best: 8.644608 ms
+            GFLOPS: 23,168
         512 threads per block (elements per thread: 95):
-            Best:
-            GFLOPS:
-        Best overall:
-        GFLOPS:
+            Best: 12.412192 ms
+            GFLOPS: 16,108
+        Best overall: 8.644608 ms
+        GFLOPS: 23,168
 
     Best overall configuration:
-    GFLOPS:
-    Speedup respecto a la suma secuencial en CPU: 
-    Speedup respecto a la suma paralelizada en CPU:
+    8.644608 ms (2048 blocks of 256 threads for sum kernel, elements per thread: 191)
+    GFLOPS: 23,168
+    Speedup respecto a la suma secuencial en CPU: 133.527527 ms / 8.644608 ms = 15.44x
+    Speedup respecto a la suma paralelizada en CPU: 69.153603 ms / 8.644608 ms = 8.00x
             
-
-        

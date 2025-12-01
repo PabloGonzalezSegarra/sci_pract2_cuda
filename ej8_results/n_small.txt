@@ -12,90 +12,90 @@ de cada una. Se obtendra la aceleracion respecto a la CPU.
 
 CPU (FLOPS =  N * N * 2 / tiempo):
     1. 324755.684563 ms
-    GFLOPS: 6.15 
+    GFLOPS: 6.158 GFLOPS
 
 GPU No optimizado (FLOPS =  N * N * 2 / tiempo):
     Threads per block: 64
         Best: 4453.951172 ms
-        GFLOPS: 449.04 
+        GFLOPS: 
 
     Threads per block: 128
         Best: 4389.302734 ms
-        GFLOPS: 455.66 
+        GFLOPS: 
 
     Threads per block: 256
         Best: 4435.747070 ms
-        GFLOPS: 450.89 
+        GFLOPS: 
 
     Threads per block: 512
         Best: 4478.253418 ms
-        GFLOPS: 446.61 
+        GFLOPS: 
     
     Best overall: 4389.302734 ms (128 threads per block)
-    GFLOPS: 455.66
+    GFLOPS: 455 GFLOPS
     Speedup: 73.99x
 
 GPU Pre-Calculando la suma de b (FLOPS = 2N / tiempo):
     Threads per block: 64
         Best: 1.427520 ms
-        GFLOPS: 1,401 
+        GFLOPS: 
 
     Threads per block: 128
         Best: 1.417632 ms
-        GFLOPS: 1,411
+        GFLOPS: 
 
     Threads per block: 256
         Best: 1.422080 ms
-        GFLOPS: 1,406
+        GFLOPS: 
 
     Threads per block: 512
         Best: 1.409952 ms
-        GFLOPS: 1,420
+        GFLOPS: 
     
     Best overall: 1.409952 ms (512 threads per block)
-    GFLOPS: 1,420
+    GFLOPS: 
     Speedup: 230325.53x
 
 GPU ILP optimization (FLOPS = 2N / tiempo):
     Threads per block: 64
         Best: 1.429280 ms
-        GFLOPS: 1,394
+        GFLOPS: 
 
     Threads per block: 128
         Best: 1.449440 ms
-        GFLOPS: 1,375
+        GFLOPS: 
 
     Threads per block: 256
         Best: 1.434752 ms
-        GFLOPS: 1,409
+        GFLOPS: 
 
     Threads per block: 512
         Best: 1.428832 ms
-        GFLOPS: 1,404
+        GFLOPS: 
     
     Best overall: 1.428832 ms (512 threads per block)
-    GFLOPS: 1,404
+    GFLOPS: 
     Speedup: 227307.89x
 
 GPU paralelized sum of b (2 hilos en cpu) (FLOPS = 2N / tiempo):
     Threads per block: 64
         Best: 0.950560 ms
-        GFLOPS: 2,104
+        GFLOPS: 
 
     Threads per block: 128
         Best: 1.012960 ms
-        GFLOPS: 1,972
+        GFLOPS: 
 
     Threads per block: 256
         Best: 0.904800 ms
-        GFLOPS: 2,211
+        GFLOPS: 
 
     Threads per block: 512
         Best: 0.913408 ms
-        GFLOPS: 2,192
+        GFLOPS: 
     
     Best overall: 0.904800 ms (256 threads per block)
-    GFLOPS: 2,211
+    GFLOPS: 
     Speedup: 359122.17x
 
     
