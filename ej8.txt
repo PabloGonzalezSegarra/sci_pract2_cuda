@@ -1,0 +1,149 @@
+
+
+Tiempo de ejecucion N = 1,000,000
+    CPU:
+        1. 324755.684563 ms
+
+    GPU No optimizado:
+
+        Threads per block: 64
+            1. 4569.012207 ms
+            2. 4424.516113 ms
+            3. 4450.938965 ms
+            4. 4473.990723 ms
+            5. 4501.110352 ms
+            Best. 4424.516113 ms
+
+        Threads per block: 128
+            1. 4507.012207 ms
+            2. 4357.568359 ms
+            3. 4401.600098 ms
+            4. 4399.937500 ms
+            5. 4432.089844 ms
+            Best. 4357.568359 ms
+
+        Threads per block: 256
+            1. 4453.189453 ms
+            2. 4470.332520 ms
+            3. 4489.688477 ms
+            4. 4504.888184 ms
+            5. 4538.066895 ms
+            Best. 4453.189453 ms
+
+        Threads per block: 512
+            1. 4564.826660 ms
+            2. 4581.382324 ms
+            3. 4595.101562 ms
+            4. 4636.572754 ms
+            5. 4672.068848 ms
+            Best. 4564.826660 ms
+        Best overall: 4357.568359 ms (128 threads per block)
+        Speedup: 74.49x
+
+    GPU Pre-Calculando la suma de b:
+
+        Threads per block: 64
+            1. 1.452928 ms
+            2. 1.452864 ms
+            3. 1.425184 ms
+            4. 1.452544 ms
+            5. 1.471328 ms
+            Best. 1.425184 ms
+
+        Threads per block: 128
+            1. 1.448416 ms
+            2. 1.463360 ms
+            3. 2.124608 ms
+            4. 1.459488 ms
+            5. 2.523968 ms
+            Best. 1.448416 ms
+
+        Threads per block: 256
+            1. 1.428288 ms
+            2. 1.431584 ms
+            3. 1.419712 ms
+            4. 1.433088 ms
+            5. 1.458976 ms
+            Best. 1.419712 ms
+
+        Threads per block: 512
+            1. 3.028576 ms
+            2. 1.459680 ms
+            3. 1.485472 ms
+            4. 1.484704 ms
+            5. 1.437600 ms
+            Best. 1.437600 ms
+        Best overall: 1.419712 ms (256 threads per block)
+        Speedup: 228.72x
+
+    GPU ILP optimization:
+
+        Threads per block: 64
+            1. 1.452160 ms
+            2. 1.519648 ms
+            3. 1.444512 ms
+            4. 1.478848 ms
+            5. 1.532736 ms
+            Best. 1.444512 ms
+
+        Threads per block: 128
+            1. 1.536224 ms
+            2. 1.504896 ms
+            3. 2.266208 ms
+            4. 1.554368 ms
+            5. 1.480640 ms
+            Best. 1.480640 ms
+
+        Threads per block: 256
+            1. 1.557984 ms
+            2. 1.530752 ms
+            3. 1.458432 ms
+            4. 1.478336 ms
+            5. 1.462400 ms
+            Best. 1.458432 ms
+
+        Threads per block: 512
+            1. 1.475776 ms
+            2. 1.459712 ms
+            3. 1.470336 ms
+            4. 1.451616 ms
+            5. 1.568704 ms
+            Best. 1.451616 ms
+        Best overall: 1.444512 ms (64 threads per block)
+        Speedup: 224.99x
+
+    GPU paralelized sum of b:
+
+        Threads per block: 64
+            1. 0.947136 ms
+            2. 1.509536 ms
+            3. 1.626752 ms
+            4. 1.608032 ms
+            5. 1.106272 ms
+            Best. 0.947136 ms
+
+        Threads per block: 128
+            1. 1.716832 ms
+            2. 1.633024 ms
+            3. 1.627584 ms
+            4. 1.665440 ms
+            5. 1.432640 ms
+            Best. 1.432640 ms
+
+        Threads per block: 256
+            1. 1.617408 ms
+            2. 0.914304 ms
+            3. 1.574560 ms
+            4. 1.689280 ms
+            5. 1.062016 ms
+            Best. 0.914304 ms
+
+        Threads per block: 512
+            1. 1.628896 ms
+            2. 1.613600 ms
+            3. 1.227552 ms
+            4. 1.622304 ms
+            5. 1.017792 ms
+            Best. 1.017792 ms
+        Best overall: 0.914304 ms (256 threads per block)
+        Speedup: 354.99x
