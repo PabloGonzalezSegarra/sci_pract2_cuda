@@ -100,29 +100,93 @@ primero se ha compilado y ejecutado la version original en CPU, obteniendo un ti
 
 Para obtener los tiempos de ejecución en GPU con distintas configuraciones numero de bloques
 y hilos por bloque, se ha modificado el código del ejercicio 3 para variar estos parámetros. Todas las 
-configuraciones se han ejecutardo
+configuraciones se han ejecutado multiples veces y se ha tomado el mejor tiempo de ejecución. En la 
+tabla \ref{tab:tiempos-speedup} se muestran los resultados obtenidos.
 
 \begin{table}[h!]
 \centering
 \begin{tabular}{lcc}
     \hline
-	extbf{Versión} & \textbf{Tiempo de ejecución (ms)} & \textbf{Speedup GPU vs CPU} \\
+	\textbf{Versión} & \textbf{Tiempo de ejecución (ms)} & \textbf{Speedup GPU vs CPU} \\
     \hline
-    1 thread / block & & \\
-    16 threads / block & & \\
-    32 threads / block & & \\
-    256 threads / block & & \\
+    CPU (original) & 992.6 & 1.00 \\
+    1 thread / block & 532.3 & 1.86 \\
+    16 threads / block & 438.2 & 2.27 \\
+    32 threads / block & 431.8 & 2.30 \\
+    256 threads / block & 428.4 & 2.32 \\
     \hline
 \end{tabular}
 \caption{Tiempos de ejecución y speedup para distintas configuraciones de hilos/ bloque}
 \label{tab:tiempos-speedup}
 \end{table}
- 
+
+Como se puede observar la parelelización en GPU ofrece una mejora significativa en el tiempo de
+ejecución en comparación con la versión en CPU. El mejor rendimiento se obtiene con 256 hilos por bloque,
+logrando un speedup de aproximadamente 2.32 veces respecto a la ejecución en CPU. Sin embargo, la 
+mejora a partir de 16 hilos por bloque es marginal.
+
+A continuación se muestra el código modificado para variar el número de bloques e hilos por bloque:
+\lstinputlisting[
+    language=CUDA, 
+    style=codestyle, 
+    caption={Código CUDA modificado para variar bloques e hilos por bloque}
+    ]
+    {../ej4.cu}
+
+
 % 5
 \section*{Ejercicio 5}\addcontentsline{toc}{section}{Ejercicio 5}
 
+En este ejercicio se ha creado un kernel para la funcion \cppcode{void heavy_cpu(float* data, int n)}, el codigo
+se puede ver a continuacion:
+
+\begin{lstlisting}[
+    language=CUDA, 
+    style=codestyle, 
+    caption={Código CUDA del kernel para la función heavy\_cpu}
+    ]
+__global__ void heavy_cpu(float* data, int n) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (i < n) {
+        float x = data[i];
+        for (int j = 0; j < 10000; j++) {
+            x = sinf(x) * 1.00001f + cosf(x) * 0.99999f;
+        }
+        data[i] = x;
+    }
+}
+\end{lstlisting}
+
 % 6
 \section*{Ejercicio 6}\addcontentsline{toc}{section}{Ejercicio 6}
+
+Para este ejercicio se ha usado la misma metodologia que en los ejercicios anteriores, 
+pero esta vez se ha medido solo el tiempo de ejecucion del kernel, sin contar las 
+transferencias de datos entre host y device.
+Se ha ejecutado la funcion en CPU y GPU, obteniendo los siguientes tiempos:
+\begin{itemize}[topsep=0pt,itemsep=0pt]
+    \item CPU: 224,69 s
+    \item GPU: 10,33 s
+\end{itemize}
+
+Suponiendo que la funcion \cppcode{heavy_cpu} contiene 5 operaciones de coma flotante
+por iteracion del bucle, y considerando que el bucle se ejecuta 10.000 veces por cada
+elemento del array, podemos calcular el número total de operaciones de coma flotante
+realizadas durante la ejecución de la función. Dado que el array tiene un tamaño de 
+N = 1.000.000, el número total de operaciones de coma flotante es:
+\[
+\text{Total de operaciones} = N \times 10.000 \times 5 = 1.000.000 \times 10.000 \times 5 = 5 \
+\times 10^{10} \text{ operaciones}\]
+
+Con estos datos, podemos calcular el rendimiento en GFLOPS para ambas ejecuciones:
+\begin{itemize}[topsep=0pt,itemsep=2pt]
+    \item CPU: \(\frac{5 \times 10^{10} \text{ operaciones}}{224.69 \text{ s}} \approx 0.2226 \text{ GFLOPS}\)
+    \item GPU: \(\frac{5 \times 10^{10} \text{ operaciones}}{10.33 \text{ s}} \approx 4.8385 \text{ GFLOPS}\)
+\end{itemize}   
+
+
+
 
 % 7
 \section*{Ejercicio 7}\addcontentsline{toc}{section}{Ejercicio 7}
